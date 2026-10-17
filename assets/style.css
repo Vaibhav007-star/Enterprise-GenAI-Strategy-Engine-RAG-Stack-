@@ -1,0 +1,307 @@
+/* ==========================================================================
+   ENTERPRISE GENAI STRATEGY ENGINE — BCG EXECUTIVE SUITE THEME
+   Bespoke Design System: Obsidian Navy & BCG Emerald Luxe
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-heading: 'Plus Jakarta Sans', 'Outfit', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Executive Palette */
+  --bg-deep: #070B14;
+  --bg-surface: #0E1626;
+  --bg-card: rgba(14, 22, 38, 0.75);
+  --bg-card-hover: rgba(18, 28, 48, 0.9);
+  
+  /* BCG Heritage Emerald & Accents */
+  --bcg-emerald: #00A35C;
+  --bcg-emerald-glow: rgba(0, 163, 92, 0.35);
+  --bcg-light-green: #34D399;
+  --sapphire-blue: #38BDF8;
+  --amber-gold: #F59E0B;
+  
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(0, 163, 92, 0.5);
+  --border-card: rgba(255, 255, 255, 0.1);
+
+  /* Typography */
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --text-subtle: #64748B;
+}
+
+/* ---------------- Global Reset & Typography ---------------- */
+html, body, [class*="css"] {
+  font-family: var(--font-body) !important;
+  color: var(--text-main);
+  background-color: var(--bg-deep);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: #FFFFFF !important;
+}
+
+/* ---------------- Custom Scrollbar ---------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bcg-emerald);
+}
+
+/* ---------------- Hero Banner Header ---------------- */
+.header-hero {
+  background: radial-gradient(circle at 10% 20%, rgba(0, 163, 92, 0.12) 0%, rgba(14, 22, 38, 0.85) 60%, rgba(7, 11, 20, 0.95) 100%);
+  border: 1px solid var(--border-card);
+  border-left: 4px solid var(--bcg-emerald);
+  border-radius: 16px;
+  padding: 1.8rem 2.2rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 163, 92, 0.08);
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.header-hero::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 163, 92, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.header-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.header-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 0.45rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ---------------- Status Badges ---------------- */
+.badge-status-bcg, .badge-status-online {
+  background: rgba(0, 163, 92, 0.18);
+  border: 1px solid rgba(0, 163, 92, 0.5);
+  color: #34D399;
+  border-radius: 30px;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 12px rgba(0, 163, 92, 0.2);
+}
+
+.badge-status-local {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #7DD3FC;
+  border-radius: 30px;
+  padding: 0.35rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---------------- Metric Cards ---------------- */
+.metric-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  padding: 1.35rem 1.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.metric-card:hover {
+  border-color: rgba(0, 163, 92, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 163, 92, 0.12);
+  background: var(--bg-card-hover);
+}
+
+.metric-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #34D399 0%, #10B981 40%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 0.3rem;
+  line-height: 1.2;
+}
+
+.metric-label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ---------------- Streamlit Buttons ---------------- */
+.stButton > button {
+  background: linear-gradient(135deg, #00A35C 0%, #059669 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  font-size: 0.92rem !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 0.55rem 1.25rem !important;
+  box-shadow: 0 4px 14px rgba(0, 163, 92, 0.3) !important;
+  transition: all 0.22s ease !important;
+}
+
+.stButton > button:hover {
+  background: linear-gradient(135deg, #10B981 0%, #047857 100%) !important;
+  box-shadow: 0 6px 20px rgba(0, 163, 92, 0.45) !important;
+  transform: translateY(-2px) !important;
+  color: #FFFFFF !important;
+}
+
+.stButton > button:active {
+  transform: translateY(0) !important;
+}
+
+/* ---------------- Streamlit Tabs ---------------- */
+.stTabs [data-baseweb="tab-list"] {
+  gap: 8px;
+  background-color: transparent;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 4px;
+}
+
+.stTabs [data-baseweb="tab"] {
+  height: 44px;
+  border-radius: 8px 8px 0 0;
+  padding: 0 18px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.stTabs [aria-selected="true"] {
+  color: #34D399 !important;
+  border-bottom: 3px solid var(--bcg-emerald) !important;
+  background-color: rgba(0, 163, 92, 0.08) !important;
+}
+
+/* ---------------- Chat Messages ---------------- */
+[data-testid="stChatMessage"] {
+  background-color: rgba(14, 22, 38, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.75rem;
+  backdrop-filter: blur(12px);
+}
+
+[data-testid="stChatMessage"]:nth-child(even) {
+  border-left: 3px solid var(--bcg-emerald);
+  background-color: rgba(14, 22, 38, 0.85);
+}
+
+/* ---------------- Citation Badges ---------------- */
+.citation-badge {
+  display: inline-block;
+  background: rgba(0, 163, 92, 0.16);
+  border: 1px solid rgba(0, 163, 92, 0.45);
+  color: #86EFAC;
+  border-radius: 6px;
+  padding: 0.22rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  margin: 0.2rem 0.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.citation-badge:hover {
+  background: rgba(0, 163, 92, 0.32);
+  border-color: #4ADE80;
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0, 163, 92, 0.3);
+}
+
+/* ---------------- Expanders & Accordions ---------------- */
+.streamlit-expanderHeader {
+  background-color: rgba(14, 22, 38, 0.6) !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  color: #E2E8F0 !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.streamlit-expanderHeader:hover {
+  border-color: rgba(0, 163, 92, 0.35) !important;
+  color: #34D399 !important;
+}
+
+/* ---------------- Form Inputs & Selectboxes ---------------- */
+[data-baseweb="select"] > div, 
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input {
+  background-color: rgba(14, 22, 38, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 8px !important;
+  color: #FFFFFF !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stNumberInput > div > div > input:focus {
+  border-color: var(--bcg-emerald) !important;
+  box-shadow: 0 0 0 2px rgba(0, 163, 92, 0.25) !important;
+}
+
+/* ---------------- Sidebar Styling ---------------- */
+[data-testid="stSidebar"] {
+  background-color: #0A0F1D !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}

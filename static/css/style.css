@@ -1,0 +1,515 @@
+/* ==========================================================================
+   ENTERPRISE GENAI STRATEGY ENGINE — BCG EXECUTIVE SUITE WEB THEME
+   Bespoke Design System: Obsidian Navy & Emerald Luxe
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Executive Obsidian Palette */
+  --bg-deep: #060A13;
+  --bg-sidebar: #090F1E;
+  --bg-card: rgba(13, 20, 36, 0.75);
+  --bg-card-hover: rgba(18, 28, 50, 0.88);
+  --bg-input: rgba(14, 22, 38, 0.9);
+  
+  /* BCG Heritage Emerald & Accents */
+  --bcg-emerald: #00A35C;
+  --bcg-emerald-glow: rgba(0, 163, 92, 0.35);
+  --bcg-emerald-light: #34D399;
+  --sapphire: #38BDF8;
+  --amber: #F59E0B;
+  --rose: #F43F5E;
+  
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.1);
+  --border-glow: rgba(0, 163, 92, 0.45);
+
+  /* Typography */
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* ---------------- Custom Scrollbar ---------------- */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bcg-emerald);
+}
+
+/* ---------------- Layout: Sidebar + Main Content ---------------- */
+#sidebar {
+  width: 280px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 1.5rem 1rem;
+}
+
+#main-content {
+  margin-left: 280px;
+  flex: 1;
+  padding: 2rem 2.5rem;
+  max-width: calc(100vw - 280px);
+}
+
+/* ---------------- Sidebar Brand & Navigation ---------------- */
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 1.5rem;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #00A35C 0%, #059669 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 16px rgba(0, 163, 92, 0.4);
+}
+
+.brand-text h2 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.brand-text p {
+  font-size: 0.72rem;
+  color: var(--bcg-emerald-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  border: 1px solid transparent;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+.nav-item.active {
+  background: linear-gradient(90deg, rgba(0, 163, 92, 0.15) 0%, rgba(0, 163, 92, 0.04) 100%);
+  color: #34D399;
+  border-color: rgba(0, 163, 92, 0.35);
+  border-left: 3px solid var(--bcg-emerald);
+}
+
+.nav-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.sidebar-footer {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* ---------------- Top Banner / Hero ---------------- */
+.header-hero {
+  background: radial-gradient(circle at 10% 20%, rgba(0, 163, 92, 0.14) 0%, rgba(14, 22, 38, 0.85) 60%, rgba(6, 10, 19, 0.95) 100%);
+  border: 1px solid var(--border-card);
+  border-left: 4px solid var(--bcg-emerald);
+  border-radius: 16px;
+  padding: 1.8rem 2.2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 163, 92, 0.08);
+  backdrop-filter: blur(16px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+.badge-bcg {
+  background: rgba(0, 163, 92, 0.18);
+  border: 1px solid rgba(0, 163, 92, 0.5);
+  color: #34D399;
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 0 14px rgba(0, 163, 92, 0.25);
+}
+
+/* ---------------- Metrics Grid ---------------- */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  padding: 1.35rem 1.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.metric-card:hover {
+  border-color: rgba(0, 163, 92, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 163, 92, 0.12);
+  background: var(--bg-card-hover);
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #34D399 0%, #10B981 40%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 0.3rem;
+  line-height: 1.2;
+}
+
+.metric-delta {
+  font-size: 0.8rem;
+  color: #34D399;
+  margin-top: 0.3rem;
+  font-weight: 600;
+}
+
+/* ---------------- Views & Panels ---------------- */
+.view-panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.view-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- Interactive Cards & Tabs ---------------- */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.tab-nav {
+  display: flex;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.tab-btn.active {
+  color: #34D399;
+  background-color: rgba(0, 163, 92, 0.12);
+  border-bottom: 2px solid var(--bcg-emerald);
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-primary {
+  background: linear-gradient(135deg, #00A35C 0%, #059669 100%);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 163, 92, 0.35);
+  transition: all 0.22s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #10B981 0%, #047857 100%);
+  box-shadow: 0 6px 22px rgba(0, 163, 92, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--bcg-emerald);
+  color: #34D399;
+  background: rgba(0, 163, 92, 0.08);
+}
+
+/* ---------------- Form Elements ---------------- */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #FFFFFF;
+  padding: 0.75rem 1rem;
+  font-size: 0.92rem;
+  font-family: var(--font-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--bcg-emerald);
+  box-shadow: 0 0 0 3px rgba(0, 163, 92, 0.25);
+}
+
+/* ---------------- Chat Consultation ---------------- */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  background: rgba(14, 22, 38, 0.6);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #F8FAFC;
+}
+
+.chat-bubble.assistant {
+  align-self: flex-start;
+  background: rgba(14, 22, 38, 0.9);
+  border: 1px solid var(--border-card);
+  border-left: 4px solid var(--bcg-emerald);
+  color: #F1F5F9;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.chat-input-bar {
+  display: flex;
+  padding: 1rem 1.25rem;
+  background: rgba(9, 15, 30, 0.95);
+  border-top: 1px solid var(--border-subtle);
+  gap: 0.75rem;
+}
+
+/* ---------------- Citations Drawer ---------------- */
+.citation-card {
+  background: rgba(14, 22, 38, 0.8);
+  border: 1px solid var(--border-card);
+  border-left: 3px solid var(--bcg-emerald);
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+}
+
+.citation-card:hover {
+  border-color: var(--border-glow);
+  background: rgba(18, 28, 50, 0.95);
+}
+
+.citation-badge {
+  display: inline-block;
+  background: rgba(0, 163, 92, 0.18);
+  border: 1px solid rgba(0, 163, 92, 0.45);
+  color: #86EFAC;
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+/* ---------------- Tables & Grids ---------------- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-card);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.data-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}

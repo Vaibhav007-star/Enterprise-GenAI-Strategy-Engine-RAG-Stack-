@@ -1,0 +1,11 @@
+Company,Ticker,Fiscal_Year,Revenue_Billion_USD,Operating_Income_Billion_USD,Net_Income_Billion_USD,Gross_Margin_Pct,Operating_Margin_Pct,R_and_D_Spend_Billion,CapEx_Billion,AI_Cloud_Segment_Revenue_Billion,Free_Cash_Flow_Billion
+Microsoft,MSFT,FY2023,211.9,88.5,72.4,68.9,41.8,27.2,31.9,87.9,55.7
+Microsoft,MSFT,FY2024,245.1,109.4,88.1,69.3,44.6,29.5,55.7,105.4,62.8
+Apple,AAPL,FY2023,383.3,114.3,97.0,44.1,29.8,29.9,10.0,85.2,99.6
+Apple,AAPL,FY2024,391.0,123.2,93.7,46.2,31.5,31.4,9.5,96.2,108.8
+NVIDIA,NVDA,FY2023,27.0,4.2,4.4,56.9,15.6,7.3,1.8,15.0,3.8
+NVIDIA,NVDA,FY2024,60.9,33.0,29.8,72.7,54.1,8.7,3.0,47.5,27.0
+Alphabet,GOOGL,FY2023,307.4,84.3,73.8,56.8,27.4,45.4,32.3,33.1,69.5
+Alphabet,GOOGL,FY2024,350.0,102.5,88.5,57.5,29.3,48.2,51.4,43.2,74.0
+Amazon,AMZN,FY2023,574.8,36.9,30.4,47.0,6.4,85.6,48.1,90.8,36.8
+Amazon,AMZN,FY2024,638.0,60.5,51.2,48.8,9.5,92.0,62.0,107.5,47.7

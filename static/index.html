@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise GenAI Strategy Engine — BCG Executive Suite</title>
+  <meta name="description" content="Advanced RAG Intelligence Platform analyzing real Fortune 500 SEC 10-K filings with parent-child hybrid search and deterministic financial calculations.">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- Chart.js CDN for interactive visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- ================= SIDEBAR NAVIGATION ================= -->
+  <aside id="sidebar">
+    <div class="brand-header">
+      <div class="brand-logo">⚡</div>
+      <div class="brand-text">
+        <h2>Strategy Engine</h2>
+        <p>BCG Executive Suite</p>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li class="nav-item active" data-view="dashboard" id="nav-dashboard">
+        <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+        <span>Executive Dashboard</span>
+      </li>
+      <li class="nav-item" data-view="assistant" id="nav-assistant">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Knowledge Assistant</span>
+      </li>
+      <li class="nav-item" data-view="financial" id="nav-financial">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span>Financial Intelligence</span>
+      </li>
+      <li class="nav-item" data-view="comparison" id="nav-comparison">
+        <svg viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        <span>10-K Comparison Matrix</span>
+      </li>
+      <li class="nav-item" data-view="compliance" id="nav-compliance">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Risk & Compliance</span>
+      </li>
+      <li class="nav-item" data-view="library" id="nav-library">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span>Document Library</span>
+      </li>
+      <li class="nav-item" data-view="evaluation" id="nav-evaluation">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>RAG Evaluation Suite</span>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div style="margin-bottom: 0.35rem; color: #86EFAC; font-weight: 600;">● System Operational</div>
+      <div>ChromaDB • BM25 • SentenceTransformers</div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN CONTENT AREA ================= -->
+  <main id="main-content">
+
+    <!-- Top Executive Banner -->
+    <div class="header-hero">
+      <div>
+        <h1 class="header-title">Enterprise GenAI Strategy Engine</h1>
+        <p class="header-subtitle">
+          Transforming Corporate Documents into Actionable Intelligence • Real SEC 10-K Filings & BCG Advisory Playbooks
+        </p>
+      </div>
+      <div class="badge-bcg">
+        <span>●</span> BCG Strategic Lens
+      </div>
+    </div>
+
+    <!-- Telemetry Cards -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Audited SEC Filings</div>
+        <div class="metric-value" id="stat-docs">-</div>
+        <div class="metric-delta">Active in Knowledge Base</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Indexed Chunks</div>
+        <div class="metric-value" id="stat-chunks">-</div>
+        <div class="metric-delta">ChromaDB + Parent Linked</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Avg Query Latency</div>
+        <div class="metric-value" id="stat-latency">- ms</div>
+        <div class="metric-delta">Hybrid RRF Pipeline</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Active LLM Backend</div>
+        <div class="metric-value" id="stat-model" style="font-size: 1.5rem; margin-top: 0.6rem;">Grounded AI</div>
+        <div class="metric-delta">Zero-Hallucination Mode</div>
+      </div>
+    </div>
+
+    <!-- ================= VIEW 1: EXECUTIVE DASHBOARD ================= -->
+    <section id="view-dashboard" class="view-panel active">
+      <div style="display: grid; grid-template-columns: 7fr 5fr; gap: 1.5rem;">
+        
+        <!-- Left: Peer Chart -->
+        <div class="glass-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <h3>📊 Tech Giants Financial Benchmarks (FY2024)</h3>
+            <span style="font-size: 0.8rem; color: var(--bcg-emerald-light); font-weight: 600;">Audited SEC 10-K Data</span>
+          </div>
+          <div style="height: 320px;">
+            <canvas id="chart-peers-overview"></canvas>
+          </div>
+        </div>
+
+        <!-- Right: BCG Transformation Card -->
+        <div class="glass-panel">
+          <h3 style="margin-bottom: 1rem; color: #86EFAC;">🏛️ The BCG 10-20-70 AI Rule</h3>
+          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.2rem;">
+            BCG’s empirical research reveals that true EBITDA transformation from Generative AI follows the <strong>10-20-70 principle</strong>:
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid #38BDF8;">
+              <strong style="color: #38BDF8;">10% Algorithms:</strong> Model selection, embeddings, parent-child RAG
+            </div>
+            <div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid #F59E0B;">
+              <strong style="color: #F59E0B;">20% Tech & Data:</strong> ChromaDB vector stores, data pipelines, low-latency APIs
+            </div>
+            <div style="padding: 0.75rem 1rem; background: rgba(255,255,255,0.03); border-radius: 8px; border-left: 3px solid #00A35C;">
+              <strong style="color: #4ADE80;">70% People & Processes:</strong> Core workflow re-engineering & executive alignment
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recent Filings Table -->
+      <div class="glass-panel" style="margin-top: 1.5rem;">
+        <h3 style="margin-bottom: 1rem;">🗃️ Active Enterprise Filings in Strategy Engine</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Document Name</th>
+              <th>Format</th>
+              <th>Size</th>
+              <th>Sections</th>
+              <th>Tables</th>
+              <th>Ingestion Date</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard-docs-table">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 2: KNOWLEDGE ASSISTANT ================= -->
+    <section id="view-assistant" class="view-panel">
+      
+      <!-- 1-Click Case Prompts -->
+      <div style="margin-bottom: 1.25rem;">
+        <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.6rem;">
+          ⚡ 1-Click BCG Strategic Case Prompts:
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+          <button class="btn-outline quick-prompt" data-query="Compare Microsoft vs Apple AI Strategy and Cloud Margins from their FY2024 10-K Filings">
+            📊 MSFT vs AAPL Cloud Margins
+          </button>
+          <button class="btn-outline quick-prompt" data-query="What are Microsoft's top risk factors in Item 1A regarding AI regulatory scrutiny and GPUs?">
+            ⚠️ MSFT Item 1A AI & GPU Risks
+          </button>
+          <button class="btn-outline quick-prompt" data-query="According to the BCG Enterprise AI Strategy report, what is the 10-20-70 transformation rule?">
+            🏛️ BCG 10-20-70 Transformation Playbook
+          </button>
+          <button class="btn-outline quick-prompt" data-query="Evaluate Apple's EU Digital Markets Act (DMA) regulatory antitrust exposure and App Store impact">
+            ⚖️ AAPL EU DMA Antitrust Vulnerability
+          </button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 7fr 5fr; gap: 1.5rem;">
+        
+        <!-- Left: Chat Workspace -->
+        <div class="chat-container">
+          <div style="padding: 0.85rem 1.25rem; background: rgba(9, 15, 30, 0.95); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <label class="form-label" style="margin: 0; font-size: 0.8rem;">Advisory Persona:</label>
+              <select id="chat-persona-select" class="form-select" style="padding: 0.35rem 0.75rem; font-size: 0.85rem; width: auto;">
+                <option value="bcg_partner">BCG Senior Partner (MECE & Value at Stake)</option>
+                <option value="private_equity">Private Equity Principal (EBITDA & Quality)</option>
+                <option value="technical">Technical RAG Architect (Latency & Citations)</option>
+              </select>
+            </div>
+            <button class="btn-outline" id="btn-clear-chat" style="padding: 0.3rem 0.75rem; font-size: 0.75rem;">Clear Session</button>
+          </div>
+
+          <div class="chat-messages" id="chat-messages-container">
+            <div class="chat-bubble assistant">
+              <strong style="color: #4ADE80;">Strategy Engine Online:</strong><br>
+              Hello. I am your strategic C-suite advisor. I synthesize evidence directly from audited SEC Form 10-Ks, P&L datasets, and BCG transformation playbooks with verifiable line-level citations. Select a prompt above or ask a strategic question below.
+            </div>
+          </div>
+
+          <div class="chat-input-bar">
+            <input type="text" id="chat-query-input" class="form-input" placeholder="Ask a strategic question across SEC 10-K filings and strategy matrices...">
+            <button class="btn-primary" id="btn-send-query">
+              <span>Analyze</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Traceable Citations Drawer -->
+        <div class="glass-panel" style="margin: 0; display: flex; flex-direction: column;">
+          <h3 style="margin-bottom: 0.75rem; display: flex; align-items: center; justify-content: space-between;">
+            <span>📂 Traceable SEC 10-K Citations</span>
+            <span id="citations-count-badge" class="badge-bcg" style="font-size: 0.7rem; padding: 0.2rem 0.6rem;">0 Citations</span>
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Verified evidence passages retrieved from underlying corporate filings:
+          </p>
+          <div id="citations-container" style="overflow-y: auto; max-height: 400px; flex: 1;">
+            <div style="color: var(--text-dim); font-size: 0.85rem; font-style: italic; text-align: center; padding: 2rem;">
+              Retrieved citations and source excerpts will render here after running an inquiry.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= VIEW 3: FINANCIAL INTELLIGENCE ================= -->
+    <section id="view-financial" class="view-panel">
+      <div class="tab-nav">
+        <button class="tab-btn active" data-subtab="fin-peer">🏢 Tech Giants Peer Benchmarking</button>
+        <button class="tab-btn" data-subtab="fin-waterfall">🌊 Microsoft FY24 P&L Waterfall</button>
+        <button class="tab-btn" data-subtab="fin-valuation">💎 EBITDA Multiple & Valuation Lab</button>
+        <button class="tab-btn" data-subtab="fin-calc">🧮 Deterministic Growth & Margin Math</button>
+      </div>
+
+      <!-- Subtab 1: Peer Benchmarking -->
+      <div id="subtab-fin-peer" class="subtab-panel active">
+        <div class="glass-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3>Audited Peer Benchmarking Matrix (FY23 vs FY24)</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Real SEC Form 10-K figures for MSFT, AAPL, NVDA, GOOGL, and AMZN</p>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <select id="peer-metric-select" class="form-select" style="width: 240px;">
+                <option value="Operating_Margin_Pct">Operating Margin (%)</option>
+                <option value="Gross_Margin_Pct">Gross Margin (%)</option>
+                <option value="Revenue_Billion_USD">Total Revenue ($B)</option>
+                <option value="AI_Cloud_Segment_Revenue_Billion">Cloud / AI Segment ($B)</option>
+                <option value="Free_Cash_Flow_Billion">Free Cash Flow ($B)</option>
+              </select>
+            </div>
+          </div>
+          <div style="height: 380px;">
+            <canvas id="chart-peer-metric"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtab 2: P&L Waterfall -->
+      <div id="subtab-fin-waterfall" class="subtab-panel" style="display: none;">
+        <div class="glass-panel">
+          <h3 style="margin-bottom: 0.5rem;">Microsoft Corporation FY2024 Audited Income Statement Bridge</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            From Gross Revenue ($245.1B) to Operating Income ($109.4B) as audited in SEC Form 10-K Item 8.
+          </p>
+          <div style="height: 380px;">
+            <canvas id="chart-waterfall"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtab 3: Valuation Lab -->
+      <div id="subtab-fin-valuation" class="subtab-panel" style="display: none;">
+        <div class="glass-panel">
+          <h3 style="margin-bottom: 1rem;">Enterprise Value Creation Sensitivity Simulator</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+              <div class="form-group">
+                <label class="form-label">Base Audited EBITDA ($ Billions):</label>
+                <input type="number" id="val-base-ebitda" class="form-input" value="118.5" step="1">
+                <span style="font-size: 0.75rem; color: var(--text-dim);">E.g., Microsoft FY2024 Operating Cash Flow ~$118.5B</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">AI / RAG Cost Transformation Levers (<span id="val-cost-label">3.5%</span>):</label>
+                <input type="range" id="val-cost-slider" min="0" max="15" value="3.5" step="0.5" style="width: 100%; accent-color: #00A35C;">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Target Exit Multiple (<span id="val-multiple-label">25x</span> EV/EBITDA):</label>
+                <input type="range" id="val-multiple-slider" min="10" max="40" value="25" step="1" style="width: 100%; accent-color: #00A35C;">
+              </div>
+            </div>
+            <div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                <div class="metric-card">
+                  <div class="metric-label">Base Enterprise Value</div>
+                  <div class="metric-value" id="res-val-base">$2,962.5 B</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Post-AI Enterprise Value</div>
+                  <div class="metric-value" id="res-val-adjusted" style="color: #4ADE80;">$3,066.2 B</div>
+                  <div class="metric-delta" id="res-val-unlocked">+ $103.7 B Created</div>
+                </div>
+              </div>
+              <div style="padding: 1rem; background: rgba(0, 163, 92, 0.08); border-left: 3px solid #00A35C; border-radius: 8px;">
+                <h4 style="color: #86EFAC; font-size: 0.95rem; margin-bottom: 0.4rem;">BCG Value Creation Perspective</h4>
+                <p id="val-insight-text" style="font-size: 0.88rem; color: var(--text-main); line-height: 1.5;">
+                  A 3.5% efficiency capture generates +$4.15B in recurring annual EBITDA, unlocking +$103.7 Billion in market equity capitalization at a 25x multiple.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtab 4: Deterministic Math -->
+      <div id="subtab-fin-calc" class="subtab-panel" style="display: none;">
+        <div class="glass-panel">
+          <h3 style="margin-bottom: 1rem;">Deterministic Growth & Margin Calculator (Zero Hallucination)</h3>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem;">
+            <div>
+              <label class="form-label">Period 1 Value ($M):</label>
+              <input type="number" id="math-p1-val" class="form-input" value="211915">
+            </div>
+            <div>
+              <label class="form-label">Period 2 Value ($M):</label>
+              <input type="number" id="math-p2-val" class="form-input" value="245122">
+            </div>
+            <div style="display: flex; align-items: flex-end;">
+              <button class="btn-primary" id="btn-calc-growth" style="width: 100%;">Calculate Verified Growth</button>
+            </div>
+          </div>
+          <div id="growth-result-box" style="display: none; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+            <div style="display: flex; gap: 2rem;">
+              <div><strong>Base:</strong> <span id="res-math-p1">-</span></div>
+              <div><strong>Current:</strong> <span id="res-math-p2">-</span></div>
+              <div><strong>Percentage Growth:</strong> <span id="res-math-pct" style="color: #4ADE80; font-weight: 700;">-</span></div>
+              <div><strong>Absolute Dollar Gain:</strong> <span id="res-math-abs" style="color: #38BDF8;">-</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 4: COMPARISON MATRIX ================= -->
+    <section id="view-comparison" class="view-panel">
+      <div class="glass-panel">
+        <h3 style="margin-bottom: 0.5rem;">Side-by-Side Corporate Filing Comparison</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Cross-compare strategies, segment operating margins, and risk factors between two enterprise filings.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1.5fr auto; gap: 1rem; margin-bottom: 1.5rem;">
+          <div>
+            <label class="form-label">Baseline Document (A):</label>
+            <select id="comp-doc-1" class="form-select"></select>
+          </div>
+          <div>
+            <label class="form-label">Target Document (B):</label>
+            <select id="comp-doc-2" class="form-select"></select>
+          </div>
+          <div>
+            <label class="form-label">Comparison Focus Aspect:</label>
+            <input type="text" id="comp-focus" class="form-input" value="Segment revenue growth, operating margins, capital expenditure, and risk factors">
+          </div>
+          <div style="display: flex; align-items: flex-end;">
+            <button class="btn-primary" id="btn-run-comparison">Generate Matrix</button>
+          </div>
+        </div>
+
+        <div id="comparison-result-card" style="display: none; padding: 1.5rem; background: rgba(14, 22, 38, 0.8); border: 1px solid var(--border-card); border-left: 4px solid var(--bcg-emerald); border-radius: 12px;">
+          <h4 style="color: #86EFAC; margin-bottom: 1rem;">📋 Comparative Synthesis Matrix</h4>
+          <div id="comparison-report-body" style="line-height: 1.7; font-size: 0.95rem; white-space: pre-wrap;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 5: COMPLIANCE ================= -->
+    <section id="view-compliance" class="view-panel">
+      <div class="glass-panel">
+        <h3 style="margin-bottom: 0.5rem;">Enterprise Compliance & Regulatory Risk Scanner</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Audits corporate filings for mandates (EU AI Act, GDPR, SEC Item 1A disclosures, China supply chain risks).
+        </p>
+
+        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+          <input type="text" id="compliance-query-input" class="form-input" value="Data retention schedules, GDPR Right to Erasure, and vendor cloud risk" style="flex: 1;">
+          <button class="btn-primary" id="btn-run-compliance">Execute Audit</button>
+        </div>
+
+        <div id="compliance-result-card" style="display: none; padding: 1.5rem; background: rgba(14, 22, 38, 0.8); border: 1px solid var(--border-card); border-left: 4px solid #38BDF8; border-radius: 12px;">
+          <h4 style="color: #38BDF8; margin-bottom: 1rem;">🛡️ Regulatory Audit Findings</h4>
+          <div id="compliance-report-body" style="line-height: 1.7; font-size: 0.95rem; white-space: pre-wrap;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 6: DOCUMENT LIBRARY ================= -->
+    <section id="view-library" class="view-panel">
+      <div class="glass-panel">
+        <h3 style="margin-bottom: 0.5rem;">Enterprise Document Vault & Ingestion Pipeline</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Upload new corporate files (PDF, DOCX, XLSX, CSV, MD, TXT). SHA-256 deduplication and parent-child chunking applied automatically.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-end;">
+          <div>
+            <label class="form-label">Select Document to Ingest:</label>
+            <input type="file" id="upload-file-input" class="form-input" style="padding: 0.5rem;">
+          </div>
+          <div>
+            <label class="form-label">Chunking Strategy:</label>
+            <select id="upload-strategy-select" class="form-select">
+              <option value="parent_child">Parent-Child (Context Preserving)</option>
+              <option value="structure_aware">Structure-Aware (Headings)</option>
+              <option value="recursive">Recursive Character</option>
+            </select>
+          </div>
+          <div>
+            <button class="btn-primary" id="btn-upload-file">Upload & Index</button>
+          </div>
+        </div>
+
+        <div id="upload-status-alert" style="display: none; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;"></div>
+
+        <h4 style="margin-bottom: 1rem;">Current Indexed Document Registry</h4>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Document Name</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Content Hash</th>
+              <th>Sections</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="library-docs-table">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 7: RAG EVALUATION ================= -->
+    <section id="view-evaluation" class="view-panel">
+      <div class="glass-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div>
+            <h3>Empirical RAG Benchmark Evaluation Suite</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Automated testing across Context Precision, Context Recall, Answer Faithfulness, and Prompt Injection Defense.
+            </p>
+          </div>
+          <button class="btn-primary" id="btn-run-eval">Run Benchmark Suite</button>
+        </div>
+
+        <div id="eval-scorecard" style="display: none; margin-top: 1.5rem;">
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-label">Suite Pass Rate</div>
+              <div class="metric-value" id="eval-pass-rate" style="color: #4ADE80;">-</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Avg Context Precision</div>
+              <div class="metric-value" id="eval-precision">-</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Avg Faithfulness</div>
+              <div class="metric-value" id="eval-faithfulness">-</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Avg Total Latency</div>
+              <div class="metric-value" id="eval-latency">- ms</div>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.5rem 0 0.75rem 0;">Individual Benchmark Test Cases</h4>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Test ID</th>
+                <th>Query</th>
+                <th>Category</th>
+                <th>Result</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>Latency</th>
+              </tr>
+            </thead>
+            <tbody id="eval-cases-table">
+              <!-- Populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
