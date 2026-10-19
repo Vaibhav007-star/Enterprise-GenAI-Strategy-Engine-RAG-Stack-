@@ -13,12 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initComplianceTool();
   initDocumentLibrary();
   initEvaluationHarness();
+  initTCOSimulator();
+  initScenarioMatrix();
+  initGraphRAG();
+  initVirtualCleanRoom();
+  initTelemetryAndCache();
 });
 
 // Global state
 let currentDocuments = [];
 let peersData = [];
 let peerMetricChart = null;
+let lastStrategyResponse = null;
+
 
 // ---------------- 1. NAVIGATION CONTROLLER ----------------
 function initNavigation() {
@@ -244,7 +251,9 @@ function initChatAssistant() {
   const sendBtn = document.getElementById('btn-send-query');
   const input = document.getElementById('chat-query-input');
   const personaSelect = document.getElementById('chat-persona-select');
+  const roleSelect = document.getElementById('chat-role-select');
   const clearBtn = document.getElementById('btn-clear-chat');
+  const exportDeckBtn = document.getElementById('btn-export-last-deck');
 
   // Quick Prompt buttons
   document.querySelectorAll('.quick-prompt').forEach(btn => {
@@ -259,7 +268,50 @@ function initChatAssistant() {
     if (e.key === 'Enter') sendQuery();
   });
 
+  // PowerPoint Deck Export Handler
+  if (exportDeckBtn) {
+    exportDeckBtn.addEventListener('click', async () => {
+      if (!lastStrategyResponse) return;
+      exportDeckBtn.innerText = 'Generating Slide Deck...';
+      exportDeckBtn.disabled = true;
+
+      try {
+        const resp = await fetch('/api/export/deck', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: "BCG X Strategy Briefing",
+            subtitle: lastStrategyResponse.query,
+            query: lastStrategyResponse.query,
+            synthesis_text: lastStrategyResponse.answer
+          })
+        });
+
+        if (!resp.ok) throw new Error("Deck generation failed");
+        const blob = await resp.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `BCG_Executive_Briefing_${Date.now()}.pptx`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      } catch (err) {
+        alert("Failed to export deck: " + err.message);
+      } finally {
+        exportDeckBtn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Export Executive Deck (.pptx)</span>
+        `;
+        exportDeckBtn.disabled = false;
+      }
+    });
+  }
+
   clearBtn.addEventListener('click', () => {
+    lastStrategyResponse = null;
+    if (exportDeckBtn) exportDeckBtn.style.display = 'none';
     document.getElementById('chat-messages-container').innerHTML = `
       <div class="chat-bubble assistant">
         <strong style="color: #4ADE80;">Session Reset:</strong> Ready for new strategic enterprise inquiry.
@@ -277,7 +329,8 @@ function initChatAssistant() {
     const query = input.value.trim();
     if (!query) return;
 
-    const persona = personaSelect.value;
+    const persona = personaSelect ? personaSelect.value : 'bcg_partner';
+    const userRole = roleSelect ? roleSelect.value : 'STRATEGY_CONSULTANT';
     input.value = '';
 
     // Append User Message
@@ -285,20 +338,55 @@ function initChatAssistant() {
 
     // Append Loading State
     const loadingId = 'loading-' + Date.now();
-    appendMessage('<div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 12px; height: 12px; border: 2px solid #34D399; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite;"></div> Synthesizing evidence across SEC 10-K filings...</div>', 'assistant', loadingId);
+    appendMessage('<div style="display: flex; align-items: center; gap: 0.5rem;"><div style="width: 12px; height: 12px; border: 2px solid #34D399; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite;"></div> Synthesizing evidence across SEC 10-K filings with Agentic Critic Review...</div>', 'assistant', loadingId);
 
     try {
       const res = await fetch('/api/query', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: query, persona: persona })
+        body: JSON.stringify({
+          query: query,
+          persona: persona,
+          user_role: userRole
+        })
       });
 
       const data = await res.json();
       removeElement(loadingId);
 
-      // Render Assistant Answer
-      appendMessage(formatMarkdown(data.answer), 'assistant');
+      lastStrategyResponse = { query: query, answer: data.answer, data: data };
+      if (exportDeckBtn) exportDeckBtn.style.display = 'inline-flex';
+
+      // Build Assistant HTML with Critic Audit Card and Telemetry
+      let answerHtml = formatMarkdown(data.answer);
+
+      // Render Critic Review Box
+      if (data.critic_audit) {
+        const ca = data.critic_audit;
+        const statusClass = (ca.status || 'passed').toLowerCase();
+        const latency = data.telemetry ? data.telemetry.total_latency_ms : 0;
+        
+        answerHtml += `
+          <div class="critic-audit-box ${statusClass}">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-weight: 700; color: #86EFAC;">🛡️ BCG X Partner & Risk Review: ${escapeHtml(ca.status)}</span>
+              <span class="telemetry-chip ${data.is_cache_hit ? 'cache-hit' : ''}">
+                ${data.is_cache_hit ? '⚡ Semantic Cache Hit (' + (data.cache_similarity * 100).toFixed(0) + '% match)' : '⏱️ ' + latency + ' ms (Waterfall)'}
+              </span>
+            </div>
+            <div style="font-size: 0.82rem; margin-bottom: 0.35rem;">
+              <strong>Faithfulness:</strong> ${(ca.faithfulness_score * 100).toFixed(0)}% | 
+              <strong>Numerical Precision:</strong> ${(ca.numerical_accuracy_score * 100).toFixed(0)}% | 
+              <strong>Claims Audited:</strong> ${ca.total_claims_audited}
+            </div>
+            <div style="font-size: 0.82rem; color: #94A3B8; font-style: italic;">
+              ${escapeHtml(ca.partner_recommendation)}
+            </div>
+          </div>
+        `;
+      }
+
+      appendMessage(answerHtml, 'assistant');
 
       // Render Citations
       renderCitations(data.citations);
@@ -633,3 +721,266 @@ function formatMarkdown(text) {
   out = out.replace(/\n\n/g, '<br><br>');
   return out;
 }
+
+// ---------------- 10. BCG 10-20-70 TCO SIMULATOR ----------------
+function initTCOSimulator() {
+  const empSlider = document.getElementById('tco-emp-slider');
+  const qSlider = document.getElementById('tco-q-slider');
+  const timeSlider = document.getElementById('tco-time-slider');
+  const wageSlider = document.getElementById('tco-wage-slider');
+  const budgetSlider = document.getElementById('tco-budget-slider');
+  const recalcBtn = document.getElementById('btn-recalc-tco');
+
+  if (!empSlider) return;
+
+  const sliders = [empSlider, qSlider, timeSlider, wageSlider, budgetSlider];
+  sliders.forEach(s => s && s.addEventListener('input', updateTCO));
+  if (recalcBtn) recalcBtn.addEventListener('click', updateTCO);
+
+  async function updateTCO() {
+    const emp = parseInt(empSlider.value);
+    const q = parseFloat(qSlider.value);
+    const timeSaved = parseFloat(timeSlider.value);
+    const wage = parseFloat(wageSlider.value);
+    const budget = parseFloat(budgetSlider.value);
+
+    document.getElementById('tco-emp-label').innerText = `${emp.toLocaleString()} users`;
+    document.getElementById('tco-q-label').innerText = `${q.toFixed(1)} queries/day`;
+    document.getElementById('tco-time-label').innerText = `${timeSaved} minutes`;
+    document.getElementById('tco-wage-label').innerText = `$${wage} / hour`;
+    document.getElementById('tco-budget-label').innerText = `$${(budget / 1000).toLocaleString()}K`;
+
+    try {
+      const res = await fetch('/api/tco/simulate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          num_employees: emp,
+          daily_queries_per_employee: q,
+          minutes_saved_per_query: timeSaved,
+          employee_hourly_cost: wage,
+          total_transformation_budget: budget
+        })
+      });
+
+      const d = await res.json();
+      document.getElementById('tco-bcg-10').innerText = `$${(d.bcg_10_algorithms_budget / 1000).toFixed(0)}K`;
+      document.getElementById('tco-bcg-20').innerText = `$${(d.bcg_20_tech_data_budget / 1000).toFixed(0)}K`;
+      document.getElementById('tco-bcg-70').innerText = `$${(d.bcg_70_people_workflows_budget / 1000).toFixed(0)}K`;
+
+      document.getElementById('tco-hours').innerText = `${Math.round(d.annual_hours_saved).toLocaleString()} hrs`;
+      document.getElementById('tco-ebitda').innerText = `+$${(d.annual_net_ebitda_impact / 1000000).toFixed(1)}M`;
+      document.getElementById('tco-payback').innerText = `${d.payback_period_months.toFixed(1)} Mos`;
+      document.getElementById('tco-verdict-text').innerText = d.executive_verdict;
+    } catch (err) {
+      console.warn("TCO Simulation failed:", err);
+    }
+  }
+
+  // Initial calculation
+  setTimeout(updateTCO, 200);
+}
+
+// ---------------- 11. SCENARIO SENSITIVITY MATRIX ----------------
+function initScenarioMatrix() {
+  const btn = document.getElementById('btn-run-scenario-matrix');
+  if (btn) btn.addEventListener('click', loadScenarioMatrix);
+
+  async function loadScenarioMatrix() {
+    try {
+      const res = await fetch('/api/scenarios/sensitivity', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          base_ebitda: 109.4,
+          cost_savings_pcts: [2.0, 4.0, 6.0, 8.0, 10.0],
+          multiples: [15.0, 18.0, 22.0, 26.0, 30.0]
+        })
+      });
+
+      const d = await res.json();
+      const tbody = document.getElementById('scenario-matrix-body');
+      tbody.innerHTML = '';
+
+      d.cost_reduction_steps_pct.forEach((step, rowIdx) => {
+        const tr = document.createElement('tr');
+        let rowHtml = `<td><strong>+${step.toFixed(1)}% Efficiency</strong></td>`;
+        d.exit_multiples.forEach((m, colIdx) => {
+          const val = d.matrix[rowIdx][colIdx];
+          const delta = d.delta_value_matrix[rowIdx][colIdx];
+          const isHigh = rowIdx >= 3 && colIdx >= 3;
+          rowHtml += `
+            <td class="sensitivity-cell ${isHigh ? 'highlight' : ''}">
+              $${val.toFixed(1)}B
+              <div style="font-size: 0.72rem; color: #86EFAC;">(+ $${delta.toFixed(1)}B)</div>
+            </td>
+          `;
+        });
+        tr.innerHTML = rowHtml;
+        tbody.appendChild(tr);
+      });
+    } catch (err) {
+      console.warn("Scenario Matrix load failed:", err);
+    }
+  }
+
+  setTimeout(loadScenarioMatrix, 300);
+}
+
+// ---------------- 12. GRAPHRAG VALUE NETWORK ----------------
+function initGraphRAG() {
+  const refreshBtn = document.getElementById('btn-refresh-graph');
+  const pathBtn = document.getElementById('btn-find-path');
+
+  if (refreshBtn) refreshBtn.addEventListener('click', loadGraphData);
+  if (pathBtn) pathBtn.addEventListener('click', findMultiHopPath);
+
+  async function loadGraphData() {
+    try {
+      const res = await fetch('/api/graph/data');
+      const d = await res.json();
+
+      const corpBox = document.getElementById('graph-nodes-corporates');
+      const suppBox = document.getElementById('graph-nodes-suppliers');
+      const riskBox = document.getElementById('graph-nodes-risks');
+
+      corpBox.innerHTML = '';
+      suppBox.innerHTML = '';
+      riskBox.innerHTML = '';
+
+      d.nodes.forEach(n => {
+        const span = document.createElement('div');
+        span.className = 'network-node-badge';
+
+        if (n.category === 'Enterprise' || n.category === 'Segment') {
+          span.style.background = 'rgba(56, 189, 248, 0.15)';
+          span.style.border = '1px solid rgba(56, 189, 248, 0.4)';
+          span.style.color = '#38BDF8';
+          span.innerHTML = `<strong>${escapeHtml(n.label)}</strong> <small>(${n.id})</small>`;
+          corpBox.appendChild(span);
+        } else if (n.category === 'Supplier' || n.category === 'Partner' || n.category === 'Technology') {
+          span.style.background = 'rgba(245, 158, 11, 0.15)';
+          span.style.border = '1px solid rgba(245, 158, 11, 0.4)';
+          span.style.color = '#F59E0B';
+          span.innerHTML = `<strong>${escapeHtml(n.label)}</strong> <small>(${n.category})</small>`;
+          suppBox.appendChild(span);
+        } else {
+          span.style.background = 'rgba(244, 63, 94, 0.15)';
+          span.style.border = '1px solid rgba(244, 63, 94, 0.4)';
+          span.style.color = '#FDA4AF';
+          span.innerHTML = `<strong>${escapeHtml(n.label)}</strong> <small>(${n.category})</small>`;
+          riskBox.appendChild(span);
+        }
+      });
+    } catch (err) {
+      console.warn("Graph data load failed:", err);
+    }
+  }
+
+  async function findMultiHopPath() {
+    const src = document.getElementById('graph-source-select').value;
+    const tgt = document.getElementById('graph-target-select').value;
+    const resBox = document.getElementById('graph-path-result');
+    const stepsBox = document.getElementById('graph-path-steps');
+
+    try {
+      const res = await fetch(`/api/graph/path?source=${encodeURIComponent(src)}&target=${encodeURIComponent(tgt)}`);
+      const d = await res.json();
+
+      resBox.style.display = 'block';
+      if (d.paths && d.paths.length > 0) {
+        const path = d.paths[0];
+        let chain = `<strong>${src}</strong>`;
+        path.forEach(step => {
+          chain += ` &nbsp;──[<span style="color: #86EFAC;">${step.relation}</span>]──>&nbsp; <strong>${step.to}</strong>`;
+        });
+        stepsBox.innerHTML = chain;
+      } else {
+        stepsBox.innerHTML = `<span style="color: #94A3B8;">No direct path found under depth limit 4. Entities interact via market-level aggregate indices.</span>`;
+      }
+    } catch (err) {
+      alert("Pathfinding error: " + err.message);
+    }
+  }
+
+  setTimeout(loadGraphData, 400);
+}
+
+// ---------------- 13. VIRTUAL CLEAN ROOM (RBAC) ----------------
+function initVirtualCleanRoom() {
+  const btn = document.getElementById('btn-test-vdr-access');
+  if (!btn) return;
+
+  btn.addEventListener('click', async () => {
+    const role = document.getElementById('vdr-test-role-select').value;
+    const resBox = document.getElementById('vdr-audit-results');
+    const summary = document.getElementById('vdr-audit-summary');
+    const accessible = document.getElementById('vdr-accessible-docs');
+
+    resBox.style.display = 'block';
+
+    const roleClearances = {
+      'PUBLIC_ANALYST': ['PUBLIC_10K'],
+      'STRATEGY_CONSULTANT': ['PUBLIC_10K', 'RESTRICTED_STRATEGY'],
+      'MA_PARTNER_CLEANROOM': ['PUBLIC_10K', 'RESTRICTED_STRATEGY', 'CONFIDENTIAL_DEALROOM'],
+      'COMPLIANCE_AUDITOR': ['PUBLIC_10K', 'RESTRICTED_STRATEGY', 'AUDIT_GOVERNANCE']
+    };
+
+    const allowed = roleClearances[role] || ['PUBLIC_10K'];
+    summary.innerHTML = `Role <strong>${role}</strong> is authorized for clearance tiers: <span style="color: #34D399;">${allowed.join(', ')}</span>.`;
+
+    let html = `<ul style="margin-left: 1.5rem; line-height: 1.8;">`;
+    currentDocuments.forEach(doc => {
+      const isConf = doc.file_name.toLowerCase().includes('clean') || doc.file_name.toLowerCase().includes('deal');
+      const isPlaybook = doc.file_name.toLowerCase().includes('playbook') || doc.file_name.toLowerCase().includes('strategy');
+      
+      let docTier = 'PUBLIC_10K';
+      if (isConf) docTier = 'CONFIDENTIAL_DEALROOM';
+      else if (isPlaybook) docTier = 'RESTRICTED_STRATEGY';
+
+      const hasAccess = allowed.includes(docTier);
+      html += `
+        <li>
+          <strong>${escapeHtml(doc.file_name)}</strong> [${docTier}] — 
+          <span style="color: ${hasAccess ? '#4ADE80' : '#F43F5E'}; font-weight: 700;">
+            ${hasAccess ? '✓ Full Access Granted' : '✗ REDACTED / Clean Room Blocked'}
+          </span>
+        </li>
+      `;
+    });
+    html += `</ul>`;
+    accessible.innerHTML = html;
+  });
+}
+
+// ---------------- 14. TELEMETRY & SEMANTIC CACHE ----------------
+function initTelemetryAndCache() {
+  const refreshBtn = document.getElementById('btn-refresh-cache-stats');
+  const clearBtn = document.getElementById('btn-clear-cache');
+
+  if (refreshBtn) refreshBtn.addEventListener('click', updateCacheStats);
+  if (clearBtn) {
+    clearBtn.addEventListener('click', async () => {
+      await fetch('/api/cache/clear', { method: 'POST' });
+      alert("Semantic Cache purged.");
+      updateCacheStats();
+    });
+  }
+
+  async function updateCacheStats() {
+    try {
+      const res = await fetch('/api/cache/stats');
+      const d = await res.json();
+
+      document.getElementById('cache-hit-rate').innerText = `${d.hit_rate_pct.toFixed(1)}%`;
+      document.getElementById('cache-total-entries').innerText = d.total_entries;
+      document.getElementById('cache-tokens-saved').innerText = `${d.estimated_tokens_saved.toLocaleString()} tokens`;
+      document.getElementById('cache-cost-saved').innerText = `$${d.estimated_cost_saved_usd.toFixed(4)}`;
+    } catch (err) {
+      console.warn("Failed to fetch cache stats:", err);
+    }
+  }
+
+  setTimeout(updateCacheStats, 500);
+}
+

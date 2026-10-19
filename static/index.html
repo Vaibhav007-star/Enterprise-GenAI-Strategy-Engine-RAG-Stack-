@@ -42,6 +42,18 @@
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         <span>Risk & Compliance</span>
       </li>
+      <li class="nav-item" data-view="graph" id="nav-graph">
+        <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="16.5"/><line x1="15.5" y1="7.5" x2="8.5" y2="16.5"/></svg>
+        <span>GraphRAG Value Network</span>
+      </li>
+      <li class="nav-item" data-view="security" id="nav-security">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Virtual Clean Room (RBAC)</span>
+      </li>
+      <li class="nav-item" data-view="telemetry" id="nav-telemetry">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span>Production Telemetry & Cache</span>
+      </li>
       <li class="nav-item" data-view="library" id="nav-library">
         <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         <span>Document Library</span>
@@ -183,16 +195,33 @@
         
         <!-- Left: Chat Workspace -->
         <div class="chat-container">
-          <div style="padding: 0.85rem 1.25rem; background: rgba(9, 15, 30, 0.95); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 0.75rem;">
-              <label class="form-label" style="margin: 0; font-size: 0.8rem;">Advisory Persona:</label>
-              <select id="chat-persona-select" class="form-select" style="padding: 0.35rem 0.75rem; font-size: 0.85rem; width: auto;">
-                <option value="bcg_partner">BCG Senior Partner (MECE & Value at Stake)</option>
-                <option value="private_equity">Private Equity Principal (EBITDA & Quality)</option>
-                <option value="technical">Technical RAG Architect (Latency & Citations)</option>
-              </select>
+          <div style="padding: 0.85rem 1.25rem; background: rgba(9, 15, 30, 0.95); border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <label class="form-label" style="margin: 0; font-size: 0.75rem; color: var(--text-muted);">Persona:</label>
+                <select id="chat-persona-select" class="form-select" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; width: auto;">
+                  <option value="bcg_partner">BCG Senior Partner (Pyramid MECE)</option>
+                  <option value="private_equity">Private Equity Principal (EBITDA)</option>
+                  <option value="technical">Technical RAG Architect (Latency)</option>
+                </select>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.4rem;">
+                <label class="form-label" style="margin: 0; font-size: 0.75rem; color: #86EFAC;">VDR Role:</label>
+                <select id="chat-role-select" class="form-select" style="padding: 0.35rem 0.6rem; font-size: 0.8rem; width: auto; border-color: rgba(0, 163, 92, 0.4);">
+                  <option value="STRATEGY_CONSULTANT">Strategy Consultant (Standard)</option>
+                  <option value="MA_PARTNER_CLEANROOM">M&A Clean Room Partner (Confidential)</option>
+                  <option value="PUBLIC_ANALYST">Public Analyst (10-K Only)</option>
+                  <option value="COMPLIANCE_AUDITOR">Compliance Auditor (Audit Logs)</option>
+                </select>
+              </div>
             </div>
-            <button class="btn-outline" id="btn-clear-chat" style="padding: 0.3rem 0.75rem; font-size: 0.75rem;">Clear Session</button>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <button class="btn-deck-export" id="btn-export-last-deck" style="display: none;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Export Executive Deck (.pptx)</span>
+              </button>
+              <button class="btn-outline" id="btn-clear-chat" style="padding: 0.3rem 0.75rem; font-size: 0.75rem;">Clear Session</button>
+            </div>
           </div>
 
           <div class="chat-messages" id="chat-messages-container">
@@ -233,10 +262,12 @@
     <!-- ================= VIEW 3: FINANCIAL INTELLIGENCE ================= -->
     <section id="view-financial" class="view-panel">
       <div class="tab-nav">
-        <button class="tab-btn active" data-subtab="fin-peer">🏢 Tech Giants Peer Benchmarking</button>
-        <button class="tab-btn" data-subtab="fin-waterfall">🌊 Microsoft FY24 P&L Waterfall</button>
-        <button class="tab-btn" data-subtab="fin-valuation">💎 EBITDA Multiple & Valuation Lab</button>
-        <button class="tab-btn" data-subtab="fin-calc">🧮 Deterministic Growth & Margin Math</button>
+        <button class="tab-btn active" data-subtab="subtab-fin-peer">🏢 Tech Giants Peer Benchmarking</button>
+        <button class="tab-btn" data-subtab="subtab-fin-waterfall">🌊 Microsoft FY24 P&L Waterfall</button>
+        <button class="tab-btn" data-subtab="subtab-fin-valuation">💎 EBITDA Multiple & Valuation Lab</button>
+        <button class="tab-btn" data-subtab="subtab-fin-tco">💼 BCG 10-20-70 TCO & ROI Simulator</button>
+        <button class="tab-btn" data-subtab="subtab-fin-scenario">📐 Scenario Stress-Testing Matrix</button>
+        <button class="tab-btn" data-subtab="subtab-fin-calc">🧮 Deterministic Growth & Margin Math</button>
       </div>
 
       <!-- Subtab 1: Peer Benchmarking -->
@@ -317,9 +348,121 @@
             </div>
           </div>
         </div>
+      <!-- Subtab 4: BCG 10-20-70 TCO & ROI Simulator -->
+      <div id="subtab-fin-tco" class="subtab-panel" style="display: none;">
+        <div class="glass-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <div>
+              <h3 style="color: #86EFAC;">💼 BCG 10-20-70 GenAI Total Cost of Ownership (TCO) Simulator</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Simulate Cloud API vs Self-Hosted Private GPU Cluster costs, 10-20-70 budget allocation, and annual EBITDA payback.
+              </p>
+            </div>
+            <button class="btn-primary" id="btn-recalc-tco">Recalculate TCO</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+              <div class="tco-slider-group">
+                <label>Enterprise Knowledge Workers: <span id="tco-emp-label" style="color: #38BDF8; font-weight: 700;">2,500 users</span></label>
+                <input type="range" id="tco-emp-slider" min="500" max="15000" step="500" value="2500">
+              </div>
+              <div class="tco-slider-group">
+                <label>Daily Queries per Employee: <span id="tco-q-label" style="color: #38BDF8; font-weight: 700;">4.0 queries/day</span></label>
+                <input type="range" id="tco-q-slider" min="1" max="15" step="0.5" value="4">
+              </div>
+              <div class="tco-slider-group">
+                <label>Minutes Saved per Strategic Inquiry: <span id="tco-time-label" style="color: #4ADE80; font-weight: 700;">12 minutes</span></label>
+                <input type="range" id="tco-time-slider" min="5" max="30" step="1" value="12">
+              </div>
+              <div class="tco-slider-group">
+                <label>Average Corporate Hourly Wage ($): <span id="tco-wage-label" style="color: #4ADE80; font-weight: 700;">$85 / hour</span></label>
+                <input type="range" id="tco-wage-slider" min="40" max="200" step="5" value="85">
+              </div>
+              <div class="tco-slider-group">
+                <label>Total Transformation Budget: <span id="tco-budget-label" style="color: #F59E0B; font-weight: 700;">$1,500,000</span></label>
+                <input type="range" id="tco-budget-slider" min="250000" max="5000000" step="250000" value="1500000">
+              </div>
+            </div>
+
+            <div>
+              <!-- 10-20-70 Budget Cards -->
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem;">
+                BCG 10-20-70 Investment Allocation
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.25rem;">
+                <div class="metric-card" style="padding: 0.85rem;">
+                  <div class="metric-label" style="color: #38BDF8;">10% Model & LLM</div>
+                  <div class="metric-value" id="tco-bcg-10" style="font-size: 1.25rem;">$150K</div>
+                </div>
+                <div class="metric-card" style="padding: 0.85rem;">
+                  <div class="metric-label" style="color: #F59E0B;">20% Tech & Data</div>
+                  <div class="metric-value" id="tco-bcg-20" style="font-size: 1.25rem;">$300K</div>
+                </div>
+                <div class="metric-card" style="padding: 0.85rem;">
+                  <div class="metric-label" style="color: #4ADE80;">70% People & Process</div>
+                  <div class="metric-value" id="tco-bcg-70" style="font-size: 1.25rem;">$1,050K</div>
+                </div>
+              </div>
+
+              <!-- ROI & Payback Row -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem;">
+                <div class="metric-card" style="padding: 0.85rem;">
+                  <div class="metric-label">Annual Hours Saved</div>
+                  <div class="metric-value" id="tco-hours" style="font-size: 1.25rem; color: #38BDF8;">500,000 hrs</div>
+                </div>
+                <div class="metric-card" style="padding: 0.85rem;">
+                  <div class="metric-label">Net EBITDA Uplift</div>
+                  <div class="metric-value" id="tco-ebitda" style="font-size: 1.25rem; color: #4ADE80;">+$42.4M</div>
+                </div>
+                <div class="metric-card" style="padding: 0.85rem;">
+                  <div class="metric-label">Payback Period</div>
+                  <div class="metric-value" id="tco-payback" style="font-size: 1.25rem; color: #86EFAC;">0.4 Mos</div>
+                </div>
+              </div>
+
+              <div id="tco-verdict-box" style="padding: 0.85rem 1rem; background: rgba(0, 163, 92, 0.1); border-left: 3px solid #34D399; border-radius: 8px; font-size: 0.85rem;">
+                <strong>BCG Executive Verdict:</strong> <span id="tco-verdict-text">High-impact enterprise transformation. Payback achieved in under 12 months.</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Subtab 4: Deterministic Math -->
+      <!-- Subtab 5: Scenario Stress-Testing Matrix -->
+      <div id="subtab-fin-scenario" class="subtab-panel" style="display: none;">
+        <div class="glass-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <div>
+              <h3 style="color: #38BDF8;">📐 2D Valuation Sensitivity Matrix (EBITDA Savings vs Multiples)</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">
+                Matrix evaluates implied Enterprise Value ($ Billions) under varying efficiency capture rates and exit multiples.
+              </p>
+            </div>
+            <button class="btn-primary" id="btn-run-scenario-matrix">Refresh Matrix</button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table" id="scenario-matrix-table">
+              <thead>
+                <tr id="scenario-matrix-headers">
+                  <th>Efficiency \ Exit Multiple</th>
+                  <th>15.0x</th>
+                  <th>18.0x</th>
+                  <th>22.0x</th>
+                  <th>26.0x</th>
+                  <th>30.0x</th>
+                </tr>
+              </thead>
+              <tbody id="scenario-matrix-body">
+                <!-- Dynamically populated via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtab 6: Deterministic Math -->
       <div id="subtab-fin-calc" class="subtab-panel" style="display: none;">
         <div class="glass-panel">
           <h3 style="margin-bottom: 1rem;">Deterministic Growth & Margin Calculator (Zero Hallucination)</h3>
@@ -401,7 +544,188 @@
       </div>
     </section>
 
-    <!-- ================= VIEW 6: DOCUMENT LIBRARY ================= -->
+    <!-- ================= VIEW 6: GRAPHRAG VALUE NETWORK ================= -->
+    <section id="view-graph" class="view-panel">
+      <div class="glass-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div>
+            <h3 style="color: #86EFAC;">🕸️ GraphRAG Fortune 500 Value Chain & Risk Topology</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Entity-relationship mapping connecting tech giants, segment revenue streams, key chip suppliers, and regulatory exposures.
+            </p>
+          </div>
+          <button class="btn-primary" id="btn-refresh-graph">Reload Topology</button>
+        </div>
+
+        <!-- Multi-Hop Path Solver Bar -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 1rem; margin-bottom: 1.5rem; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px;">
+          <div>
+            <label class="form-label">Source Entity:</label>
+            <select id="graph-source-select" class="form-select">
+              <option value="MSFT">Microsoft Corporation</option>
+              <option value="AAPL">Apple Inc.</option>
+              <option value="REG_EU_AI">EU AI Act (Regulator)</option>
+              <option value="REG_EU_DMA">EU Digital Markets Act (Regulator)</option>
+              <option value="SEG_AZURE">Azure Cloud (Segment)</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Target Entity:</label>
+            <select id="graph-target-select" class="form-select">
+              <option value="TSMC">TSMC (Advanced Foundry)</option>
+              <option value="NVDA">NVIDIA (AI Hardware Supplier)</option>
+              <option value="RISK_GPU_BOTTLENECK">AI Compute Bottleneck (Risk)</option>
+              <option value="OAI">OpenAI (Strategic Partner)</option>
+              <option value="SEG_SERVICES">Apple Services (Segment)</option>
+            </select>
+          </div>
+          <div style="display: flex; align-items: flex-end;">
+            <button class="btn-primary" id="btn-find-path">Find Causal Path</button>
+          </div>
+        </div>
+
+        <div id="graph-path-result" style="display: none; margin-bottom: 1.5rem; padding: 1rem; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38BDF8; border-radius: 8px;">
+          <h4 style="color: #38BDF8; font-size: 0.9rem; margin-bottom: 0.4rem;">Multi-Hop Strategic Path Traced:</h4>
+          <div id="graph-path-steps" style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--text-main);"></div>
+        </div>
+
+        <!-- Entity Category Grids -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+          <div class="glass-panel" style="margin: 0;">
+            <h4 style="color: #38BDF8; margin-bottom: 0.75rem;">🏢 Corporates & Segments</h4>
+            <div id="graph-nodes-corporates"></div>
+          </div>
+          <div class="glass-panel" style="margin: 0;">
+            <h4 style="color: #F59E0B; margin-bottom: 0.75rem;">⚡ Suppliers & Hardware</h4>
+            <div id="graph-nodes-suppliers"></div>
+          </div>
+          <div class="glass-panel" style="margin: 0;">
+            <h4 style="color: #F43F5E; margin-bottom: 0.75rem;">⚖️ Regulators & Exposures</h4>
+            <div id="graph-nodes-risks"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 7: VIRTUAL CLEAN ROOM (RBAC) ================= -->
+    <section id="view-security" class="view-panel">
+      <div class="glass-panel">
+        <h3 style="margin-bottom: 0.5rem; color: #86EFAC;">🔐 Virtual Data Room (VDR) & Clean Room Governance</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+          Enforces role-based security boundaries across public 10-K filings, restricted strategy playbooks, and confidential M&A deal rooms.
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+          <div>
+            <h4 style="margin-bottom: 1rem;">Active Role Clearance Simulator</h4>
+            <div class="form-group">
+              <label class="form-label">Switch Persona Clearance:</label>
+              <select id="vdr-test-role-select" class="form-select">
+                <option value="STRATEGY_CONSULTANT">Strategy Consultant (Public 10-K + Strategy Playbooks)</option>
+                <option value="PUBLIC_ANALYST">Public Analyst (Public SEC 10-Ks Only)</option>
+                <option value="MA_PARTNER_CLEANROOM">M&A Clean Room Partner (Full Confidential Deal Room)</option>
+                <option value="COMPLIANCE_AUDITOR">Compliance Auditor (Audit & Regulatory Logs)</option>
+              </select>
+            </div>
+            <button class="btn-primary" id="btn-test-vdr-access">Audit Repository Access</button>
+          </div>
+
+          <div>
+            <h4 style="margin-bottom: 1rem;">Document Clearance Classifications</h4>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <div style="padding: 0.75rem; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38BDF8; border-radius: 6px; font-size: 0.85rem;">
+                <strong style="color: #38BDF8;">PUBLIC_10K:</strong> Audited SEC Form 10-K filings (MSFT, AAPL) — Accessible to all roles.
+              </div>
+              <div style="padding: 0.75rem; background: rgba(0, 163, 92, 0.08); border-left: 3px solid #34D399; border-radius: 6px; font-size: 0.85rem;">
+                <strong style="color: #34D399;">RESTRICTED_STRATEGY:</strong> BCG AI Transformation Playbook & Peer Benchmarks — Consultants & Partners.
+              </div>
+              <div style="padding: 0.75rem; background: rgba(245, 158, 11, 0.08); border-left: 3px solid #F59E0B; border-radius: 6px; font-size: 0.85rem;">
+                <strong style="color: #F59E0B;">CONFIDENTIAL_DEALROOM:</strong> M&A valuation models, clean room deal sheets — Restricted to M&A Partners.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="vdr-audit-results" style="display: none; margin-top: 1.5rem; padding: 1.25rem; background: rgba(255,255,255,0.03); border-radius: 8px;">
+          <h4 style="color: #86EFAC; margin-bottom: 0.5rem;">Access Control Policy Audit Log:</h4>
+          <p id="vdr-audit-summary" style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.75rem;"></p>
+          <div id="vdr-accessible-docs" style="font-size: 0.85rem; color: var(--text-muted);"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 8: PRODUCTION TELEMETRY & CACHE ================= -->
+    <section id="view-telemetry" class="view-panel">
+      <div class="glass-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+          <div>
+            <h3 style="color: #38BDF8;">⚡ Production Semantic Cache & Telemetry Profiler</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              High-speed vector similarity cache (>0.92 cosine) and microsecond pipeline latency breakdown.
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn-outline" id="btn-clear-cache">Purge Semantic Cache</button>
+            <button class="btn-primary" id="btn-refresh-cache-stats">Refresh Telemetry</button>
+          </div>
+        </div>
+
+        <div class="metrics-row" style="margin-bottom: 1.5rem;">
+          <div class="metric-card">
+            <div class="metric-label">Cache Hit Rate</div>
+            <div class="metric-value" id="cache-hit-rate" style="color: #4ADE80;">- %</div>
+            <div class="metric-delta">Cosine Sim > 0.92</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Cached Queries</div>
+            <div class="metric-value" id="cache-total-entries">-</div>
+            <div class="metric-delta">Active Vector Entries</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Tokens Saved</div>
+            <div class="metric-value" id="cache-tokens-saved" style="color: #38BDF8;">-</div>
+            <div class="metric-delta">LLM Inference Saved</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Cost Saved ($)</div>
+            <div class="metric-value" id="cache-cost-saved" style="color: #86EFAC;">$0.00</div>
+            <div class="metric-delta">Blended Enterprise Rate</div>
+          </div>
+        </div>
+
+        <div class="glass-panel" style="margin: 0;">
+          <h4 style="margin-bottom: 1rem;">Pipeline Latency Waterfall Architecture</h4>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <span>1. Query Embedding Generation (SentenceTransformers)</span>
+              <span style="font-family: var(--font-mono); color: #38BDF8;" id="tel-emb">~12 ms</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <span>2. Dense Vector Search (ChromaDB HNSW)</span>
+              <span style="font-family: var(--font-mono); color: #38BDF8;" id="tel-vec">~18 ms</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <span>3. Sparse Lexical Search (BM25Okapi)</span>
+              <span style="font-family: var(--font-mono); color: #38BDF8;" id="tel-bm25">~4 ms</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <span>4. Reciprocal Rank Fusion (RRF k=60) & Parent Context Expansion</span>
+              <span style="font-family: var(--font-mono); color: #38BDF8;" id="tel-rrf">~3 ms</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <span>5. Grounded LLM Advisory Synthesis</span>
+              <span style="font-family: var(--font-mono); color: #4ADE80;" id="tel-llm">~180 ms</span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 1rem; background: rgba(255,255,255,0.03); border-radius: 6px;">
+              <span>6. Agentic Critic Fact-Checking Audit</span>
+              <span style="font-family: var(--font-mono); color: #86EFAC;" id="tel-critic">~15 ms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VIEW 9: DOCUMENT LIBRARY ================= -->
     <section id="view-library" class="view-panel">
       <div class="glass-panel">
         <h3 style="margin-bottom: 0.5rem;">Enterprise Document Vault & Ingestion Pipeline</h3>

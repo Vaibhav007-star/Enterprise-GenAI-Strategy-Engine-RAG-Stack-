@@ -5,8 +5,9 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-orange.svg)](https://trychroma.com)
 [![SentenceTransformers](https://img.shields.io/badge/Embeddings-SentenceTransformers-yellow.svg)](https://sbert.net)
-[![Tests](https://img.shields.io/badge/Tests-10%2F10%20Passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-26%2F26%20Passing-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)]()
+
 
 > **Transform Enterprise Documents into Actionable Strategy.**  
 > A production-grade Retrieval-Augmented Generation (RAG) platform that queries large corporate document repositories—including audited SEC Form 10-K filings, P&L spreadsheets, contracts, and regulatory policies—delivering verified, evidence-backed answers with deterministic numerical accuracy.
@@ -87,17 +88,25 @@ The repository comes pre-indexed with authentic Fortune 500 financial records an
 
 ---
 
-## ⚡ Core Technical Pillars
+## ⚡ Core Technical Pillars — BCG X Edition
 
 | Technical Capability | Implementation Details |
 |:---|:---|
-| **Hybrid Retrieval** | Combines **Dense Vector Similarity** (`all-MiniLM-L6-v2` in ChromaDB) with **Sparse Lexical Search** (`BM25Okapi`), merged via **Reciprocal Rank Fusion (RRF)** ($k=60$). |
-| **Parent-Child Chunking** | Child chunks (400–800 chars) are indexed for search precision; parent sections (2,000 chars) are retrieved at inference time to give the LLM full surrounding context without broken sentences. |
-| **Deterministic Math** | Eliminates arithmetic hallucination. P&L tables and spreadsheets execute **deterministic Python functions** for period-over-period growth, operating margins, and departmental rankings. |
+| **Multi-Agent Critic Review** | **Self-RAG & Fact Auditing**: The `AgenticCriticAuditor` parses numerical tokens and cross-checks every assertion against retrieved context chunks, scoring Faithfulness and Numerical Precision with zero hallucination tolerance. |
+| **Boardroom PPTX Deck Export** | **Automated PowerPoint Generator**: Built with `python-pptx`, generating download-ready 16:9 widescreen BCG executive decks with action titles, MECE structured columns, and 10-20-70 execution roadmaps. |
+| **BCG 10-20-70 TCO Simulator** | **Deterministic Financial Payback**: Models enterprise cloud API vs self-hosted GPU cluster OpEx, employee hours saved, net annualized EBITDA uplift, and transformation budget split (10% Model, 20% Tech, 70% People/Process). |
+| **2D Valuation Sensitivity Matrix** | **Scenario Stress-Testing**: Generates a dynamic 2D grid evaluating Enterprise Value (EV) creation under varying operating margin efficiency captures ($2\%-10\%$) and target exit multiples ($15\times-30\times$). |
+| **GraphRAG Value Network** | **Multi-Hop Causal Reasoning**: Maps Fortune 500 entities (Microsoft, Apple, NVIDIA, TSMC, OpenAI) and regulatory exposures (EU AI Act, EU DMA), finding multi-hop paths like `MSFT -> NVDA -> TSMC`. |
+| **Virtual Clean Room (VDR / RBAC)** | **Enterprise Security Clearance**: Enforces document-level and chunk-level security tiers (`PUBLIC_10K`, `RESTRICTED_STRATEGY`, `CONFIDENTIAL_DEALROOM`, `AUDIT_GOVERNANCE`) preventing unauthorized M&A deal data leakage. |
+| **Semantic Query Cache** | **Sub-20ms Latency Acceleration**: Uses embedding cosine similarity ($>0.92$) to serve repeated C-suite strategic inquiries with zero token cost and instant execution. |
+| **Sentence-Level Grounding** | **Precision Evidence Span Highlighter**: Dissects generated answers into individual sentences, highlighting verified claims in green, inferred claims in amber, and unverified assertions in red with hover citation cards. |
+| **Hybrid Retrieval** | Combines **Dense Vector Similarity** with **Sparse Lexical Search** (`BM25Okapi`), merged via **Reciprocal Rank Fusion (RRF)** ($k=60$). |
+| **Parent-Child Chunking** | Child chunks (400–800 chars) are indexed for search precision; parent sections (2,000 chars) are retrieved at inference time to give the LLM full surrounding context. |
+| **Deterministic Math** | Eliminates arithmetic hallucination. P&L tables and spreadsheets execute **deterministic Python functions** for period-over-period growth and operating margins. |
 | **Advisory Personas** | Switch between **BCG Senior Partner Mode (Pyramidal MECE Structure)**, **Private Equity Due Diligence Mode**, and **Technical RAG Architect Mode**. |
-| **Valuation Simulator** | Interactive tool calculating implied Enterprise Value (EV) creation based on EBITDA efficiency gains (0%–15%) and target exit multiples (10x–40x). |
 | **P&L Waterfall Chart** | Interactive Chart.js visualization mapping Microsoft's audited journey from $245.1B Gross Revenue down to $109.4B Operating Income. |
 | **Automated Evaluation** | Real benchmark harness measuring Context Precision, Context Recall, Answer Faithfulness, Citation Correctness, Latency, and Prompt Injection Defense. |
+
 
 ---
 

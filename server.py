@@ -13,14 +13,16 @@ if str(BASE_DIR) not in sys.path:
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 
 from src.engine import get_engine
 from src.security.sanitizer import SecuritySanitizer
+from src.security.access_control import UserRole
 from src.financial_analysis.financial_engine import FinancialAnalysisEngine
+from src.financial_analysis.tco_calculator import TCOInputParameters
 from src.evaluation.sample_tests import get_default_test_suite
 from src.utils.logger import get_logger
 
@@ -47,6 +49,36 @@ class QueryRequest(BaseModel):
     use_hybrid: bool = True
     use_reranker: bool = False
     document_ids: Optional[List[str]] = None
+    user_role: str = "STRATEGY_CONSULTANT"
+    bypass_cache: bool = False
+
+
+class DeckExportRequest(BaseModel):
+    title: str = "Executive Strategy Briefing"
+    subtitle: str = "Fortune 500 Strategic Analysis & Financial Assessment"
+    query: str
+    synthesis_text: str
+    metrics: Optional[Dict[str, Any]] = None
+    recommendations: Optional[List[str]] = None
+    risks: Optional[List[str]] = None
+
+
+class TCOApiRequest(BaseModel):
+    num_employees: int = 2500
+    daily_queries_per_employee: float = 4.0
+    work_days_per_year: int = 250
+    avg_tokens_per_query: int = 3000
+    api_cost_per_million_tokens: float = 2.00
+    self_hosted_gpu_cluster_annual_cost: float = 120000.0
+    employee_hourly_cost: float = 85.0
+    minutes_saved_per_query: float = 12.0
+    total_transformation_budget: float = 1500000.0
+
+
+class ScenarioApiRequest(BaseModel):
+    base_ebitda: float = 109.4
+    cost_savings_pcts: Optional[List[float]] = None
+    multiples: Optional[List[float]] = None
 
 
 class GrowthRequest(BaseModel):
@@ -77,6 +109,7 @@ class ComparisonRequest(BaseModel):
 class ComplianceRequest(BaseModel):
     compliance_topic: str
     document_ids: Optional[List[str]] = None
+
 
 
 # ---------------- API ENDPOINTS ----------------
@@ -111,87 +144,165 @@ def get_documents():
 
 @app.post("/api/query")
 def execute_query(req: QueryRequest):
-    """Execute grounded question answering with customizable strategy persona."""
+    """Execute grounded question answering with customizable strategy persona and BCG X Multi-Agent Audit."""
     clean_query = SecuritySanitizer.sanitize_user_query(req.query)
     if not clean_query:
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
 
-    # Persona custom instruction prompt
-    if req.persona == "bcg_partner":
-        persona_directive = (
-            "Adopt the persona of a senior Boston Consulting Group (BCG) Strategy Partner. "
-            "Structure the response using the Pyramidal Principle:\n"
-            "1. EXECUTIVE STRATEGY RECOMMENDATION (Top-down direct answer)\n"
-            "2. QUANTITATIVE PILLARS & FINANCIAL EVIDENCE (Audited SEC Form 10-K numbers with [SOURCE X] citations)\n"
-            "3. VALUE CREATION LEVERS (Identified commercial upside)\n"
-            "4. DOWNSIDE RISK & MITIGATION FRAMEWORK (Regulatory, supply chain, geopolitical)\n"
-            "Ensure the analysis is Mutually Exclusive and Collectively Exhaustive (MECE)."
-        )
-    elif req.persona == "private_equity":
-        persona_directive = (
-            "Adopt the persona of a Private Equity / M&A Due Diligence Principal:\n"
-            "1. INVESTMENT THESIS & CORE VERDICT\n"
-            "2. RECURRING REVENUE QUALITY & SEGMENT MARGINS (Audited 10-K data with [SOURCE X])\n"
-            "3. CAPEX INTENSITY & FREE CASH FLOW CONVERSION\n"
-            "4. DOWNSIDE VULNERABILITIES & REGULATORY EXPOSURES\n"
-        )
-    else:
-        persona_directive = "Focus strictly on technical accuracy, token economy, and specific page/item references."
+    # Parse user role
+    role = UserRole.STRATEGY_CONSULTANT
+    try:
+        role = UserRole(req.user_role)
+    except ValueError:
+        pass
 
-    start_t = time.perf_counter()
-
-    # 1. Retrieve hybrid candidates
-    retrieval_output = engine.retriever.retrieve(
+    # Execute through unified BCG X engine
+    result = engine.query_enterprise(
         query=clean_query,
+        persona=req.persona,
         top_k=req.top_k,
         use_hybrid=req.use_hybrid,
         use_reranker=req.use_reranker,
-        filter_document_ids=req.document_ids,
-        expand_parent_context=True
+        document_ids=req.document_ids,
+        user_role=role,
+        bypass_cache=req.bypass_cache
     )
-    retrieved_chunks = retrieval_output["results"]
 
-    # 2. Generate Grounded Answer
-    grounded_resp = engine.generator.generate_answer(
-        query=clean_query,
-        retrieved_chunks=retrieved_chunks,
-        custom_instructions=persona_directive
-    )
-    elapsed_ms = round((time.perf_counter() - start_t) * 1000.0, 1)
-
-    # 3. Log query to document store history
+    # Log query in document store history
     engine.document_store.log_query({
         "timestamp": datetime.datetime.now().isoformat(),
         "question": clean_query,
-        "answer_preview": grounded_resp.answer[:120],
-        "citations_count": len(grounded_resp.citations),
-        "sufficient_evidence": grounded_resp.has_sufficient_evidence,
-        "latency_ms": elapsed_ms
+        "answer_preview": result["answer"][:120],
+        "citations_count": len(result.get("citations", [])),
+        "sufficient_evidence": bool(result.get("citations")),
+        "latency_ms": result["telemetry"].get("total_latency_ms", 0.0),
+        "is_cache_hit": result.get("is_cache_hit", False)
     })
 
+    # Format citations for frontend compatibility
+    formatted_citations = []
+    for c in result.get("citations", []):
+        formatted_citations.append({
+            "id": c.get("citation_id", c.get("id", "SOURCE")),
+            "document_name": c.get("document_name", c.get("source_doc_title", "Audited 10-K")),
+            "document_id": c.get("document_id", ""),
+            "page_number": c.get("page_number", 1),
+            "section_title": c.get("section_title", "Item 7 MD&A / Financials"),
+            "sheet_name": c.get("sheet_name", ""),
+            "snippet": c.get("snippet", c.get("text", "")[:240]),
+            "relevance_score": round(c.get("relevance_score", 0.95), 3)
+        })
+
     return {
-        "answer": grounded_resp.answer,
-        "citations": [
-            {
-                "id": c.citation_id,
-                "document_name": c.document_name,
-                "document_id": c.document_id,
-                "page_number": c.page_number,
-                "section_title": c.section_title,
-                "sheet_name": c.sheet_name,
-                "snippet": c.snippet,
-                "relevance_score": round(c.relevance_score, 3)
-            }
-            for c in grounded_resp.citations
-        ],
-        "has_sufficient_evidence": grounded_resp.has_sufficient_evidence,
+        "answer": result["answer"],
+        "hardened_answer": result.get("hardened_answer"),
+        "citations": formatted_citations,
+        "has_sufficient_evidence": len(formatted_citations) > 0,
+        "critic_audit": result.get("critic_audit"),
+        "grounding_report": result.get("grounding_report"),
+        "rbac_audit": result.get("rbac_audit"),
+        "telemetry": result.get("telemetry"),
+        "graph_context": result.get("graph_context"),
+        "is_cache_hit": result.get("is_cache_hit", False),
+        "cache_similarity": result.get("cache_similarity", 0.0),
         "diagnostics": {
-            **retrieval_output["diagnostics"],
-            **grounded_resp.diagnostics,
             "persona": req.persona,
-            "total_latency_ms": elapsed_ms
+            "total_latency_ms": result["telemetry"].get("total_latency_ms", 0.0),
+            "is_cache_hit": result.get("is_cache_hit", False)
         }
     }
+
+
+@app.post("/api/export/deck")
+def export_executive_deck(req: DeckExportRequest):
+    """Generate and download a boardroom-ready 16:9 widescreen PowerPoint presentation (.pptx)."""
+    try:
+        buffer = engine.deck_generator.create_executive_deck(
+            title=req.title,
+            subtitle=req.subtitle,
+            query=req.query,
+            synthesis_text=req.synthesis_text,
+            metrics=req.metrics,
+            recommendations=req.recommendations,
+            risks=req.risks
+        )
+        pptx_bytes = buffer.getvalue()
+        filename = f"BCG_Executive_Briefing_{int(time.time())}.pptx"
+        return Response(
+            content=pptx_bytes,
+            media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+        )
+    except Exception as e:
+        logger.error(f"Deck generation error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate PowerPoint deck: {str(e)}")
+
+
+@app.post("/api/tco/simulate")
+def simulate_enterprise_tco(req: TCOApiRequest):
+    """BCG 10-20-70 GenAI Total Cost of Ownership (TCO) & Value Realization simulator."""
+    params = TCOInputParameters(
+        num_employees=req.num_employees,
+        daily_queries_per_employee=req.daily_queries_per_employee,
+        work_days_per_year=req.work_days_per_year,
+        avg_tokens_per_query=req.avg_tokens_per_query,
+        api_cost_per_million_tokens=req.api_cost_per_million_tokens,
+        self_hosted_gpu_cluster_annual_cost=req.self_hosted_gpu_cluster_annual_cost,
+        employee_hourly_cost=req.employee_hourly_cost,
+        minutes_saved_per_query=req.minutes_saved_per_query,
+        total_transformation_budget=req.total_transformation_budget
+    )
+    result = engine.tco_engine.calculate_tco(params)
+    return result.model_dump()
+
+
+@app.post("/api/scenarios/sensitivity")
+def compute_sensitivity_matrix(req: ScenarioApiRequest):
+    """Generate 2D sensitivity matrix of Cloud Margin Efficiency vs Valuation Exit Multiples."""
+    result = engine.scenario_simulator.run_sensitivity_matrix(
+        base_ebitda_billions=req.base_ebitda,
+        cost_savings_pcts=req.cost_savings_pcts,
+        multiples=req.multiples
+    )
+    return result.model_dump()
+
+
+@app.get("/api/graph/data")
+def get_knowledge_graph_data():
+    """Retrieve full Fortune 500 value chain and risk topology graph."""
+    graph_data = engine.knowledge_graph.get_graph_data()
+    return graph_data.model_dump()
+
+
+@app.get("/api/graph/path")
+def find_graph_path(source: str, target: str):
+    """Find multi-hop causal paths between strategic entities."""
+    paths = engine.knowledge_graph.find_multi_hop_path(source, target)
+    return {"source": source, "target": target, "paths": paths}
+
+
+@app.get("/api/cache/stats")
+def get_cache_stats():
+    """Retrieve Semantic Query Cache metrics (hit rate, tokens saved, USD saved)."""
+    return engine.semantic_cache.get_stats().model_dump()
+
+
+@app.post("/api/cache/clear")
+def clear_semantic_cache():
+    """Reset the semantic query cache."""
+    engine.semantic_cache.clear()
+    return {"status": "cleared", "message": "Semantic cache successfully purged."}
+
+
+@app.get("/api/security/roles")
+def get_security_roles():
+    """Return available Virtual Data Room user roles and security clearances."""
+    from src.security.access_control import ROLE_PERMISSIONS
+    return {
+        "roles": [r.value for r in UserRole],
+        "permissions": {r.value: [c.value for c in perms] for r, perms in ROLE_PERMISSIONS.items()}
+    }
+
 
 
 @app.get("/api/financial/peers")
