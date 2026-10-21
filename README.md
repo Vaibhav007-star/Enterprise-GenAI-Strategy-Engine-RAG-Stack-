@@ -45,7 +45,7 @@ flowchart TD
     end
 
     subgraph Generation ["4. Grounded Synthesis & Execution"]
-        O --> P[Citation Engine: [SOURCE X] Tagging]
+        O --> P["Citation Engine: [SOURCE X] Tagging"]
         P --> R[Grounded LLM Client: Ollama / OpenAI / Groq / Fallback]
         R --> S[Evidence-Backed Advisory Output]
         D --> T[Deterministic Python Calculation Engine]
