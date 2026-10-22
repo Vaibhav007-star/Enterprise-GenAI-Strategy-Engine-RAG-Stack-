@@ -36,7 +36,10 @@ class IngestionPipeline:
         chunking_engine: Optional[ChunkingEngine] = None
     ):
         self.upload_dir = Path(upload_dir)
-        self.upload_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            self.upload_dir.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         self.vector_store = vector_store
         self.document_store = document_store
         self.chunking_engine = chunking_engine or ChunkingEngine()

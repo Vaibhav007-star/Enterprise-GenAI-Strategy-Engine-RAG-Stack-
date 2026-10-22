@@ -66,7 +66,10 @@ class AppSettings(BaseSettings):
     def ensure_directories(self) -> None:
         """Create storage directories if they do not exist."""
         for path in [self.upload_dir, self.metadata_dir, self.cache_dir, self.sample_data_dir, Path(self.chroma_persist_directory)]:
-            path.mkdir(parents=True, exist_ok=True)
+            try:
+                path.mkdir(parents=True, exist_ok=True)
+            except OSError:
+                pass
 
 
 _settings_instance: Optional[AppSettings] = None
