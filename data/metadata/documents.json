@@ -1,0 +1,100 @@
+{
+  "doc_f5358601ab": {
+    "document_id": "doc_f5358601ab",
+    "file_name": "Enterprise_Data_Governance_Policy.md",
+    "file_type": "markdown",
+    "file_size_bytes": 2855,
+    "content_hash": "f023539296ef24be7bfaea91fd75a6fceb077f06ed8bb4dd71c4fd3b1995f7f5",
+    "total_pages_or_sheets": 6,
+    "sections_count": 6,
+    "tables_count": 0,
+    "ingested_at": "2026-10-17T11:10:16.766699",
+    "metadata": {
+      "format": ".md"
+    }
+  },
+  "doc_7ae05aebb3": {
+    "document_id": "doc_7ae05aebb3",
+    "file_name": "FY2024_Financial_Performance.csv",
+    "file_type": "csv",
+    "file_size_bytes": 1008,
+    "content_hash": "6f7a76e6a1c883804e6bc00aae7e3d0a3e5fce7d3b0b330b179cf31b4073aa87",
+    "total_pages_or_sheets": 1,
+    "sections_count": 1,
+    "tables_count": 1,
+    "ingested_at": "2026-10-17T11:11:10.960040",
+    "metadata": {
+      "sheet_count": 1
+    }
+  },
+  "doc_516f50d9a9": {
+    "document_id": "doc_516f50d9a9",
+    "file_name": "Quarterly_Business_Review_Q4.md",
+    "file_type": "markdown",
+    "file_size_bytes": 2079,
+    "content_hash": "c0d74d09b069f1d35a40291d1215a27c08e518776454b966909bac3975d192f9",
+    "total_pages_or_sheets": 5,
+    "sections_count": 5,
+    "tables_count": 0,
+    "ingested_at": "2026-10-17T11:11:11.100568",
+    "metadata": {
+      "format": ".md"
+    }
+  },
+  "doc_0ecf5d925f": {
+    "document_id": "doc_0ecf5d925f",
+    "file_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "file_type": "markdown",
+    "file_size_bytes": 7313,
+    "content_hash": "86f858d2c388e20f5064d5feeb9c558830b8c5b06df8b8df3617624f71345a6c",
+    "total_pages_or_sheets": 14,
+    "sections_count": 14,
+    "tables_count": 0,
+    "ingested_at": "2026-10-17T11:21:49.506503",
+    "metadata": {
+      "format": ".md"
+    }
+  },
+  "doc_6d80d265de": {
+    "document_id": "doc_6d80d265de",
+    "file_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "file_type": "markdown",
+    "file_size_bytes": 4801,
+    "content_hash": "6db92ada7da7ba2fc835148ea391284bce3eb012b89d982b9812ad7c3664b9e5",
+    "total_pages_or_sheets": 12,
+    "sections_count": 12,
+    "tables_count": 0,
+    "ingested_at": "2026-10-17T11:22:05.702308",
+    "metadata": {
+      "format": ".md"
+    }
+  },
+  "doc_f6f1b100d7": {
+    "document_id": "doc_f6f1b100d7",
+    "file_name": "Tech_Giants_FY2023_FY2024_Financial_Comparison.csv",
+    "file_type": "csv",
+    "file_size_bytes": 884,
+    "content_hash": "8db3fddb88c8498d6a5430ab1dc64a395dacfb4b230f84237204d2c6a8ed8fc9",
+    "total_pages_or_sheets": 1,
+    "sections_count": 1,
+    "tables_count": 1,
+    "ingested_at": "2026-10-17T11:22:06.075013",
+    "metadata": {
+      "sheet_count": 1
+    }
+  },
+  "doc_3ccee697dc": {
+    "document_id": "doc_3ccee697dc",
+    "file_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "file_type": "markdown",
+    "file_size_bytes": 4192,
+    "content_hash": "311faceaa9afd2a1aaf945a90cba375e0bf14fed020511465e1c05b582780156",
+    "total_pages_or_sheets": 6,
+    "sections_count": 6,
+    "tables_count": 0,
+    "ingested_at": "2026-10-17T11:22:06.342874",
+    "metadata": {
+      "format": ".md"
+    }
+  }
+}

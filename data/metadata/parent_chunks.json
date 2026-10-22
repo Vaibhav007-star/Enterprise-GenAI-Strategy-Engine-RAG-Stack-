@@ -1,0 +1,453 @@
+{
+  "parent_doc_f5358601ab_0": {
+    "parent_id": "parent_doc_f5358601ab_0",
+    "document_id": "doc_f5358601ab",
+    "document_name": "Enterprise_Data_Governance_Policy.md",
+    "content": "**Document Reference:** POL-GOV-2024-v3  \n**Effective Date:** January 1, 2024  \n**Classification:** Confidential — Internal Enterprise Policy  \n**Review Cycle:** Annual (Next Scheduled: November 2024)\n\n---",
+    "section_title": "Enterprise Data Governance & Retention Policy",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_f5358601ab_2": {
+    "parent_id": "parent_doc_f5358601ab_2",
+    "document_id": "doc_f5358601ab",
+    "document_name": "Enterprise_Data_Governance_Policy.md",
+    "content": "This policy governs the retention, classification, privacy handling, and legal compliance obligations for all structured and unstructured information assets generated across enterprise business units. Compliance is mandatory for all employees, contractors, and third-party vendors.",
+    "section_title": "1. Executive Summary & Purpose",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_f5358601ab_4": {
+    "parent_id": "parent_doc_f5358601ab_4",
+    "document_id": "doc_f5358601ab",
+    "document_name": "Enterprise_Data_Governance_Policy.md",
+    "content": "The enterprise categorizes data assets into four discrete confidentiality tiers:\n\n- **Tier 1 — Public:** Information approved for external dissemination (marketing collateral, public press releases).\n- **Tier 2 — Internal Business:** General corporate records, non-sensitive emails, operational workflow documentation.\n- **Tier 3 — Confidential:** Customer records, financial performance forecasts, pricing models, employee performance metrics.\n- **Tier 4 — Restricted / PII:** Personally Identifiable Information (PII), biometric data, payment card numbers, and core intellectual property. Access requires multi-factor authentication (MFA) and explicit role authorization.",
+    "section_title": "2. Information Classification Framework",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_f5358601ab_6": {
+    "parent_id": "parent_doc_f5358601ab_6",
+    "document_id": "doc_f5358601ab",
+    "document_name": "Enterprise_Data_Governance_Policy.md",
+    "content": "All business units must enforce the following document retention schedules:\n\n1. **Financial and Accounting Records:** General ledgers, tax filings, and audited annual balance sheets must be retained for exactly **7 years** from the date of filing.\n2. **Employee Records:** Personnel files, compensation history, and benefits enrollment data must be retained for **5 years** post-termination.\n3. **Customer Contractual Documents:** Master Services Agreements (MSAs), Statements of Work (SOWs), and non-disclosure agreements must be preserved for **6 years** following contract expiration.\n4. **Information Security Incident Logs:** SIEM alerts, access logs, and firewall event streams must be archived for **3 years**.",
+    "section_title": "3. Mandatory Retention Schedules & Deadlines",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_f5358601ab_8": {
+    "parent_id": "parent_doc_f5358601ab_8",
+    "document_id": "doc_f5358601ab",
+    "document_name": "Enterprise_Data_Governance_Policy.md",
+    "content": "- **GDPR Article 17 (Right to Erasure):** Customer data subject deletion requests must be acknowledged within **48 hours** and fulfilled across primary databases and backup cold storage within **30 calendar days**.\n- **CCPA / CPRA Disclosures:** Annual privacy metric reports must be published by **July 1** of each fiscal year.\n- **Audit Mandates:** An independent third-party SOC 2 Type II audit must be conducted annually in **Q3**.",
+    "section_title": "4. Regulatory Compliance Obligations",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_f5358601ab_10": {
+    "parent_id": "parent_doc_f5358601ab_10",
+    "document_id": "doc_f5358601ab",
+    "document_name": "Enterprise_Data_Governance_Policy.md",
+    "content": "Any deviation from retention timelines requires written sign-off from the Chief Information Security Officer (CISO) and General Counsel. Unapproved retention of Tier 4 PII beyond specified windows carries disciplinary actions up to contract termination.",
+    "section_title": "5. Exceptions, Violations, and Risk Mitigations",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_7ae05aebb3_0": {
+    "parent_id": "parent_doc_7ae05aebb3_0",
+    "document_id": "doc_7ae05aebb3",
+    "document_name": "FY2024_Financial_Performance.csv",
+    "content": "### Financial / Operational Sheet: Data\nDimensions: 13 rows x 7 columns\nColumns: Department, Category, Q1_2024, Q2_2024, Q3_2024, Q4_2024, FY2024_Total\n\n#### Table Data Preview:\n| Department   | Category                     |   Q1_2024 |   Q2_2024 |   Q3_2024 |   Q4_2024 |   FY2024_Total |\n|:-------------|:-----------------------------|----------:|----------:|----------:|----------:|---------------:|\n| Engineering  | Research & Development       |   4200000 |   4500000 |   4800000 |   5100000 |       18600000 |\n| Engineering  | Cloud Infrastructure         |   1200000 |   1350000 |   1400000 |   1650000 |        5600000 |\n| Sales        | Commissions & Incentives     |   3100000 |   3400000 |   3900000 |   4600000 |       15000000 |\n| Sales        | Marketing Campaigns          |   1500000 |   1800000 |   2100000 |   2600000 |        8000000 |\n| Operations   | Facilities & Equipment       |    800000 |    850000 |    850000 |    900000 |        3400000 |\n| Operations   | Legal & Compliance           |    600000 |    650000 |    700000 |    850000 |        2800000 |\n| Executive    | Corporate Governance         |    900000 |    950000 |    950000 |   1000000 |        3800000 |\n| Revenue      | Enterprise Software Licenses |  14500000 |  16200000 |  17800000 |  21500000 |       70000000 |\n| Revenue      | Professional Services        |   3500000 |   3800000 |   4200000 |   4500000 |       16000000 |\n| Revenue      | Maintenance & Support        |   6000000 |   6200000 |   6500000 |   7300000 |       26000000 |\n| Total        | Gross Enterprise Revenue     |  24000000 |  26200000 |  28500000 |  33300000 |      112000000 |\n| Total        | Total Operating Expenses     |  12300000 |  13500000 |  14700000 |  16700000 |       57200000 |\n| Total        | Operating Income (EBIT)      |  11700000 |  12700000 |  13800000 |  16600000 |       54800000 |",
+    "section_title": "Data Sheet",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_7ae05aebb3_3": {
+    "parent_id": "parent_doc_7ae05aebb3_3",
+    "document_id": "doc_7ae05aebb3",
+    "document_name": "FY2024_Financial_Performance.csv",
+    "content": "#### Numerical Summary:\n- **Q1_2024**: Total=84,300,000.00, Mean=6,484,615.38, Min=600,000.00, Max=24,000,000.00\n- **Q2_2024**: Total=92,100,000.00, Mean=7,084,615.38, Min=650,000.00, Max=26,200,000.00\n- **Q3_2024**: Total=100,200,000.00, Mean=7,707,692.31, Min=700,000.00, Max=28,500,000.00\n- **Q4_2024**: Total=116,600,000.00, Mean=8,969,230.77, Min=850,000.00, Max=33,300,000.00\n- **FY2024_Total**: Total=393,200,000.00, Mean=30,246,153.85, Min=2,800,000.00, Max=112,000,000.00",
+    "section_title": "Data Sheet",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_516f50d9a9_0": {
+    "parent_id": "parent_doc_516f50d9a9_0",
+    "document_id": "doc_516f50d9a9",
+    "document_name": "Quarterly_Business_Review_Q4.md",
+    "content": "**Document ID:** QBR-2024-Q4  \n**Author:** Strategy & Corporate Development  \n**Audience:** Executive Leadership Team & Board of Directors  \n**Date:** December 15, 2024  \n\n---",
+    "section_title": "Strategic Quarterly Business Review — Q4 2024",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_516f50d9a9_2": {
+    "parent_id": "parent_doc_516f50d9a9_2",
+    "document_id": "doc_516f50d9a9",
+    "document_name": "Quarterly_Business_Review_Q4.md",
+    "content": "In FY2024, the enterprise delivered strong momentum, culminating in fourth-quarter gross revenue of **$33.3M**, representing a **16.8% increase** over Q3 revenue ($28.5M). Full-year FY2024 revenue reached **$112.0M**, exceeding the budgeted target of $105.0M by 6.7%.\n\nFull-year Operating Income (EBIT) reached **$54.8M**, demonstrating an operating margin of **48.9%**, driven by substantial gross margin expansion in high-tier Enterprise Software Licenses.",
+    "section_title": "1. Executive Performance Overview",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_516f50d9a9_4": {
+    "parent_id": "parent_doc_516f50d9a9_4",
+    "document_id": "doc_516f50d9a9",
+    "document_name": "Quarterly_Business_Review_Q4.md",
+    "content": "- **AI Platform Expansion:** Adoption of the Enterprise AI Intelligence module accelerated, contributing $18.2M in annual recurring software licenses.\n- **Client Retention:** Net Revenue Retention (NRR) closed the fiscal year at **114%**, supported by a low annualized logo churn of 2.8%.\n- **Strategic Cloud Migration:** Infrastructure re-architecting reduced variable compute costs per enterprise seat by 14.5% during Q4.",
+    "section_title": "2. Key Growth Drivers & Product Milestones",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_516f50d9a9_6": {
+    "parent_id": "parent_doc_516f50d9a9_6",
+    "document_id": "doc_516f50d9a9",
+    "document_name": "Quarterly_Business_Review_Q4.md",
+    "content": "1. **Vendor Concentration Risk:** Over 72% of customer cloud deployments rely on a single Tier-1 cloud infrastructure vendor. Management is initiating multi-cloud mitigation strategies in Q1 2025.\n2. **Regulatory & Sovereignty Constraints:** Emerging cross-border AI data governance regulations in the EU may extend implementation cycles for European enterprise clients by 4 to 6 weeks.\n3. **Talent Competition in AI Engineering:** Specialized AI engineering headcount experienced salary pressure, increasing Engineering OpEx by 12% in H2.",
+    "section_title": "3. Major Operational & Macroeconomic Risks",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_516f50d9a9_8": {
+    "parent_id": "parent_doc_516f50d9a9_8",
+    "document_id": "doc_516f50d9a9",
+    "document_name": "Quarterly_Business_Review_Q4.md",
+    "content": "- Accelerate geographic expansion into Southeast Asia financial hubs by Q2 2025.\n- Dedicate $6.5M in R&D to automated compliance and RAG governance capabilities.\n- Finalize dual-cloud provider disaster recovery redundancy before the end of Q3 2025.",
+    "section_title": "4. Strategic Recommendations for FY2025",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_0ecf5d925f_0": {
+    "parent_id": "parent_doc_0ecf5d925f_0",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "**For the Fiscal Year Ended June 30, 2024**  \n**Commission File Number 001-37845**  \n**MICROSOFT CORPORATION**  \n*(Exact name of registrant as specified in its charter)*  \n**State of Incorporation:** Washington | **IRS Employer Identification No.:** 91-1144442  \n**Principal Executive Offices:** One Microsoft Way, Redmond, Washington 98052-6399  \n\n---",
+    "section_title": "FORM 10-K — ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_0ecf5d925f_2": {
+    "parent_id": "parent_doc_0ecf5d925f_2",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "Microsoft is a technology company whose mission is to empower every person and every organization on the planet to achieve more. In fiscal year 2024, Microsoft accelerated its transition to an AI-first platform company, embedding generative AI capabilities across our entire tech stack through Microsoft Copilot and our strategic partnership with OpenAI.\n\nWe operate three reportable segments:\n1. **Productivity and Business Processes:** Includes Office Commercial (Microsoft 365 Commercial products and cloud services), Office Consumer, LinkedIn, and Dynamics business solutions (Dynamics 365).\n2. **Intelligent Cloud:** Consists of server products and cloud services, including Azure and other cloud services, Windows Server, SQL Server, Visual Studio, System Center, and GitHub.\n3. **More Personal Computing:** Includes Windows OEM and Commercial licensing, Devices (Surface), Gaming (Xbox content, consoles, and Activision Blizzard post-acquisition), and Search and news advertising.",
+    "section_title": "Strategic Overview & Generative AI Transformation",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_0ecf5d925f_5": {
+    "parent_id": "parent_doc_0ecf5d925f_5",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Total Revenue:** $245.1 billion, an increase of $33.2 billion or 16% compared to $211.9 billion in fiscal year 2023.\n- **Operating Income:** $109.4 billion, an increase of $20.9 billion or 24% compared to $88.5 billion in fiscal year 2023.\n- **Operating Margin:** 44.6%, expanding by approximately 290 basis points compared to 41.8% in fiscal year 2023.\n- **Net Income:** $88.1 billion, an increase of 22% compared to $72.4 billion in fiscal year 2023.\n- **Diluted Earnings Per Share (EPS):** $11.80, up 22% compared to $9.68 in fiscal year 2023.\n- **Capital Expenditures (including finance leases):** $55.7 billion, driven by cloud and AI infrastructure investments (GPUs, data centers, network architecture).\n\n---",
+    "section_title": "Fiscal Year 2024 Financial Highlights",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_0ecf5d925f_7": {
+    "parent_id": "parent_doc_0ecf5d925f_7",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "Our strategic positioning depends on the successful deployment of AI technologies. As AI capabilities evolve rapidly, they present operational, regulatory, and reputational risks:\n- New legal frameworks such as the European Union Artificial Intelligence Act (EU AI Act) impose rigorous transparency, copyright compliance, and conformity assessment obligations.\n- Algorithmic bias, flawed outputs (\"hallucinations\"), or inadvertent disclosure of proprietary customer data could result in regulatory penalties, litigation, and brand impairment.\n- Increased competition from specialized hyperscalers and open-source foundation models may exert downward pricing pressure on AI inference services.",
+    "section_title": "1. AI Safety, Alignment, and Emerging Global Regulatory Oversight",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_0ecf5d925f_9": {
+    "parent_id": "parent_doc_0ecf5d925f_9",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "Our Intelligent Cloud segment and Azure AI platform rely on specialized accelerator hardware (GPUs and custom ASICs). Global semiconductor supply bottlenecks, export control regulations (such as US restrictions on advanced computing chips to certain foreign markets), or datacenter power interconnection delays could constrain our capacity to meet surging customer demand.",
+    "section_title": "2. Cloud Infrastructure & Specialized Hardware Supply Constraints",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_0ecf5d925f_11": {
+    "parent_id": "parent_doc_0ecf5d925f_11",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "As a global hyperscaler, Microsoft is subject to sophisticated cyberattacks by nation-state actors and organized adversaries targeting identity infrastructure (such as Microsoft Entra ID) and customer tenant data. A major breach could result in severe commercial damages, contractual liabilities, and regulatory enforcement.\n\n---",
+    "section_title": "3. Cybersecurity Vulnerabilities & Nation-State Threats",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_0ecf5d925f_13": {
+    "parent_id": "parent_doc_0ecf5d925f_13",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Revenue:** $105.4 billion in FY2024, compared to $87.9 billion in FY2023, representing growth of 20% (20% in constant currency).\n- **Azure and Other Cloud Services:** Revenue grew 30% driven by broad-based enterprise migrations and contributions from Azure AI services. Azure AI customer base exceeded 60,000 enterprise organizations.\n- **Operating Income:** $49.6 billion, up 28% compared to $38.8 billion in FY2023. Operating margin expanded to 47.1%.",
+    "section_title": "1. Intelligent Cloud Segment",
+    "page_number": null,
+    "metadata": {
+      "level": 5
+    }
+  },
+  "parent_doc_0ecf5d925f_15": {
+    "parent_id": "parent_doc_0ecf5d925f_15",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Revenue:** $77.7 billion in FY2024, compared to $69.3 billion in FY2023, growth of 12% (12% in constant currency).\n- **Office Commercial Products & Cloud Services:** Grew 13%, driven by Office 365 Commercial seat growth of 11% and increasing Average Revenue Per User (ARPU) following Microsoft 365 Copilot rollouts.\n- **LinkedIn:** Grew 10%, driven by Talent Solutions and Marketing Solutions.\n- **Dynamics 365:** Grew 22%, reflecting strong momentum in enterprise ERP and CRM cloud workloads.\n- **Operating Income:** $40.3 billion, up 18% compared to $34.2 billion in FY2023.",
+    "section_title": "2. Productivity and Business Processes Segment",
+    "page_number": null,
+    "metadata": {
+      "level": 5
+    }
+  },
+  "parent_doc_0ecf5d925f_17": {
+    "parent_id": "parent_doc_0ecf5d925f_17",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Revenue:** $62.0 billion in FY2024, compared to $54.7 billion in FY2023, growth of 13% (13% in constant currency), primarily reflecting the consolidation of Activision Blizzard.\n- **Windows OEM:** Grew 8%, driven by commercial PC demand and Windows 11 enterprise migration.\n- **Gaming Revenue:** Grew 39%, driven by Activision Blizzard acquisition net of integration expenses.\n- **Operating Income:** $19.5 billion, up 26% compared to $15.5 billion in FY2023.\n\n---",
+    "section_title": "3. More Personal Computing Segment",
+    "page_number": null,
+    "metadata": {
+      "level": 5
+    }
+  },
+  "parent_doc_0ecf5d925f_19": {
+    "parent_id": "parent_doc_0ecf5d925f_19",
+    "document_id": "doc_0ecf5d925f",
+    "document_name": "MSFT_FY2024_Form_10K_Annual_Report.md",
+    "content": "*(Amounts in Millions of USD, except per share data)*\n\n| Metric / Financial Category | FY2024 (June 30, 2024) | FY2023 (June 30, 2023) | FY2022 (June 30, 2022) |\n|:---|:---|:---|:---|\n| **Productivity and Business Processes** | $77,713 | $69,274 | $63,364 |\n| **Intelligent Cloud** | $105,362 | $87,907 | $75,251 |\n| **More Personal Computing** | $62,047 | $54,734 | $59,655 |\n| **Total Revenue** | **$245,122** | **$211,915** | **$198,270** |\n| Cost of Revenue — Product & Service | $75,268 | $65,863 | $62,650 |\n| **Gross Margin** | **$169,854** | **$146,052** | **$135,620** |\n| *Gross Margin Percentage* | *69.3%* | *68.9%* | *68.4%* |\n| Research and Development (R&D) | $29,510 | $27,195 | $24,512 |\n| Sales and Marketing (S&M) | $24,424 | $22,759 | $21,825 |\n| General and Administrative (G&A) | $6,487 | $7,575 | $5,578 |\n| Total Operating Expenses | $60,421 | $57,529 | $51,915 |\n| **Operating Income (EBIT)** | **$109,433** | **$88,523** | **$83,705** |\n| *Operating Margin Percentage* | *44.6%* | *41.8%* | *42.2%* |\n| Other Income / (Expense), Net | $1,570 | $1,025 | $333 |\n| Income Before Income Taxes | $111,003 | $89,548 | $84,038 |\n| Provision for Income Taxes | $22,867 | $17,187 | $10,978 |\n| **Net Income** | **$88,136** | **$72,361** | **$72,738** |\n| Diluted Earnings Per Share | $11.80 | $9.68 | $9.65 |\n| Cash Flow from Operations | $118,548 | $87,582 | $89,035 |\n| Capital Expenditures (Free Cash Flow impact) | $55,700 | $31,900 | $23,900 |\n| **Free Cash Flow** | **$62,848** | **$55,682** | **$65,135** |",
+    "section_title": "ITEM 8. AUDITED CONSOLIDATED STATEMENTS OF INCOME",
+    "page_number": null,
+    "metadata": {
+      "level": 3
+    }
+  },
+  "parent_doc_6d80d265de_0": {
+    "parent_id": "parent_doc_6d80d265de_0",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "**For the Fiscal Year Ended September 28, 2024**  \n**Commission File Number 001-36743**  \n**APPLE INC.**  \n*(Exact name of registrant as specified in its charter)*  \n**State of Incorporation:** California | **IRS Employer Identification No.:** 94-2404110  \n**Principal Executive Offices:** One Apple Park Way, Cupertino, California 95014  \n\n---",
+    "section_title": "FORM 10-K — ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_6d80d265de_2": {
+    "parent_id": "parent_doc_6d80d265de_2",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories, and sells a variety of related services. In fiscal year 2024, the Company unveiled **Apple Intelligence**, a personal intelligence system integrated deeply into iOS 18, iPadOS 18, and macOS Sequoia, combining on-device generative models with Private Cloud Compute to maintain strict user privacy standards.\n\nThe Company’s fiscal year is the 52- or 53-week period that ends on the last Saturday of September.",
+    "section_title": "Overview & Strategic Product Architecture",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_4": {
+    "parent_id": "parent_doc_6d80d265de_4",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Total Net Sales:** $391.0 billion, an increase of $7.8 billion or 2% compared to $383.3 billion in fiscal year 2023.\n- **Services Net Sales:** $96.2 billion, an increase of $11.0 billion or 13% compared to $85.2 billion in fiscal year 2023. Services gross margin reached an all-time high of 74.0%.\n- **Products Net Sales:** $294.9 billion, compared to $298.1 billion in fiscal year 2023, reflecting a 1% contraction due to elongated smartphone replacement cycles in Greater China.\n- **Operating Income:** $123.2 billion, an increase of 8% compared to $114.3 billion in fiscal year 2023.\n- **Operating Margin:** 31.5%, expanding from 29.8% in fiscal year 2023.\n- **Net Income:** $93.7 billion, compared to $97.0 billion in fiscal year 2023 (impacted by a one-time European Commission state aid tax charge of $10.2 billion).\n\n---",
+    "section_title": "Fiscal Year 2024 Financial Highlights",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_7": {
+    "parent_id": "parent_doc_6d80d265de_7",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "A substantial portion of the Company's manufacturing, assembly, and customer revenue is concentrated in Greater China and adjacent regions. Trade restrictions, escalating tariffs, local regulatory restrictions on foreign technology usage, and economic headwinds in the Chinese consumer market directly affect hardware gross margins and unit sales volumes.",
+    "section_title": "1. Geopolitical Exposures and Supply Chain Concentration in Greater China",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_9": {
+    "parent_id": "parent_doc_6d80d265de_9",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "The European Union’s Digital Markets Act (DMA) designates Apple as a \"gatekeeper\" and mandates structural modifications to the iOS ecosystem, including allowing alternative app marketplaces, alternative payment processing mechanisms, and unbundled default browser engines. These regulatory shifts create operational complexity, increase security attack surfaces, and reduce Apple's App Store take-rate economics.",
+    "section_title": "2. Digital Markets Act (DMA) & Global Antitrust Regulatory Pressures",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_11": {
+    "parent_id": "parent_doc_6d80d265de_11",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "The commercial success of Apple Intelligence relies on custom Apple Silicon (A17 Pro, A18, M4 series chips) fabricated exclusively by Taiwan Semiconductor Manufacturing Company (TSMC). Any disruption to TSMC’s advanced lithography nodes or failure of consumer demand to generate an AI smartphone upgrade supercycle could impair financial growth.\n\n---",
+    "section_title": "3. On-Device AI Monetization & Silicon Supply Dependency",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_13": {
+    "parent_id": "parent_doc_6d80d265de_13",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "*(Amounts in Millions of USD)*\n\n| Category | FY2024 (Sept 28, 2024) | FY2023 (Sept 30, 2023) | FY2022 (Sept 24, 2022) | YoY Change (FY24 vs FY23) |\n|:---|:---|:---|:---|:---|\n| **iPhone** | $201,183 | $200,583 | $205,489 | +0.3% |\n| **Mac** | $29,984 | $29,357 | $40,177 | +2.1% |\n| **iPad** | $26,694 | $28,300 | $29,292 | -5.7% |\n| **Wearables, Home & Accessories** | $37,005 | $39,845 | $41,241 | -7.1% |\n| **Services (App Store, Cloud, Pay, Music, TV+)** | $96,169 | $85,200 | $78,129 | **+12.9%** |\n| **Total Net Sales** | **$391,035** | **$383,285** | **$394,328** | **+2.0%** |",
+    "section_title": "Net Sales by Product and Service Category",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_15": {
+    "parent_id": "parent_doc_6d80d265de_15",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Products Cost of Sales:** $187,032 million in FY2024 (Products Gross Margin: 36.6%).\n- **Services Cost of Sales:** $24,993 million in FY2024 (Services Gross Margin: 74.0%).\n- **Total Gross Margin:** $180,683 million (Consolidated Gross Margin: 46.2%, expanding 210 bps from 44.1% in FY2023).",
+    "section_title": "Cost of Sales and Gross Margin Breakdown",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_6d80d265de_17": {
+    "parent_id": "parent_doc_6d80d265de_17",
+    "document_id": "doc_6d80d265de",
+    "document_name": "AAPL_FY2024_Form_10K_Annual_Report.md",
+    "content": "- **Research and Development (R&D):** $31,370 million, up 5% from $29,915 million in FY2023, reflecting continuous investments in generative AI models, silicon engineering, and mixed reality platforms.\n- **Selling, General and Administrative (SG&A):** $26,097 million, up 5% from $24,932 million in FY2023.\n- **Operating Income:** $123,216 million (Operating Margin: 31.5%).",
+    "section_title": "Operating Expenses",
+    "page_number": null,
+    "metadata": {
+      "level": 4
+    }
+  },
+  "parent_doc_f6f1b100d7_0": {
+    "parent_id": "parent_doc_f6f1b100d7_0",
+    "document_id": "doc_f6f1b100d7",
+    "document_name": "Tech_Giants_FY2023_FY2024_Financial_Comparison.csv",
+    "content": "### Financial / Operational Sheet: Data\nDimensions: 10 rows x 12 columns\nColumns: Company, Ticker, Fiscal_Year, Revenue_Billion_USD, Operating_Income_Billion_USD, Net_Income_Billion_USD, Gross_Margin_Pct, Operating_Margin_Pct, R_and_D_Spend_Billion, CapEx_Billion, AI_Cloud_Segment_Revenue_Billion, Free_Cash_Flow_Billion",
+    "section_title": "Data Sheet",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_f6f1b100d7_2": {
+    "parent_id": "parent_doc_f6f1b100d7_2",
+    "document_id": "doc_f6f1b100d7",
+    "document_name": "Tech_Giants_FY2023_FY2024_Financial_Comparison.csv",
+    "content": "#### Table Data Preview:\n| Company   | Ticker   | Fiscal_Year   |   Revenue_Billion_USD |   Operating_Income_Billion_USD |   Net_Income_Billion_USD |   Gross_Margin_Pct |   Operating_Margin_Pct |   R_and_D_Spend_Billion |   CapEx_Billion |   AI_Cloud_Segment_Revenue_Billion |   Free_Cash_Flow_Billion |\n|:----------|:---------|:--------------|----------------------:|-------------------------------:|-------------------------:|-------------------:|-----------------------:|------------------------:|----------------:|-----------------------------------:|-------------------------:|\n| Microsoft | MSFT     | FY2023        |                 211.9 |                           88.5 |                     72.4 |               68.9 |                   41.8 |                    27.2 |            31.9 |                               87.9 |                     55.7 |\n| Microsoft | MSFT     | FY2024        |                 245.1 |                          109.4 |                     88.1 |               69.3 |                   44.6 |                    29.5 |            55.7 |                              105.4 |                     62.8 |\n| Apple     | AAPL     | FY2023        |                 383.3 |                          114.3 |                     97   |               44.1 |                   29.8 |                    29.9 |            10   |                               85.2 |                     99.6 |\n| Apple     | AAPL     | FY2024        |                 391   |                          123.2 |                     93.7 |               46.2 |                   31.5 |                    31.4 |             9.5 |                               96.2 |                    108.8 |\n| NVIDIA    | NVDA     | FY2023        |                  27   |                            4.2 |                      4.4 |               56.9 |                   15.6 |                     7.3 |             1.8 |                               15   |                      3.8 |\n| NVIDIA    | NVDA     | FY2024        |                  60.9 |                           33   |                     29.8 |               72.7 |                   54.1 |                     8.7 |             3   |                               47.5 |                     27   |\n| Alphabet  | GOOGL    | FY2023        |                 307.4 |                           84.3 |                     73.8 |               56.8 |                   27.4 |                    45.4 |            32.3 |                               33.1 |                     69.5 |\n| Alphabet  | GOOGL    | FY2024        |                 350   |                          102.5 |                     88.5 |               57.5 |                   29.3 |                    48.2 |            51.4 |                               43.2 |                     74   |\n| Amazon    | AMZN     | FY2023        |                 574.8 |                           36.9 |                     30.4 |               47   |                    6.4 |                    85.6 |            48.1 |                               90.8 |                     36.8 |\n| Amazon    | AMZN     | FY2024        |                 638   |                           60.5 |                     51.2 |               48.8 |                    9.5 |                    92   |            62   |                              107.5 |                     47.7 |",
+    "section_title": "Data Sheet",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_f6f1b100d7_9": {
+    "parent_id": "parent_doc_f6f1b100d7_9",
+    "document_id": "doc_f6f1b100d7",
+    "document_name": "Tech_Giants_FY2023_FY2024_Financial_Comparison.csv",
+    "content": "#### Numerical Summary:\n- **Revenue_Billion_USD**: Total=3,189.40, Mean=318.94, Min=27.00, Max=638.00\n- **Operating_Income_Billion_USD**: Total=756.80, Mean=75.68, Min=4.20, Max=123.20\n- **Net_Income_Billion_USD**: Total=629.30, Mean=62.93, Min=4.40, Max=97.00\n- **Gross_Margin_Pct**: Total=568.20, Mean=56.82, Min=44.10, Max=72.70\n- **Operating_Margin_Pct**: Total=290.00, Mean=29.00, Min=6.40, Max=54.10\n- **R_and_D_Spend_Billion**: Total=405.20, Mean=40.52, Min=7.30, Max=92.00\n- **CapEx_Billion**: Total=305.70, Mean=30.57, Min=1.80, Max=62.00\n- **AI_Cloud_Segment_Revenue_Billion**: Total=711.80, Mean=71.18, Min=15.00, Max=107.50\n- **Free_Cash_Flow_Billion**: Total=585.70, Mean=58.57, Min=3.80, Max=108.80",
+    "section_title": "Data Sheet",
+    "page_number": null,
+    "metadata": {
+      "level": 1
+    }
+  },
+  "parent_doc_3ccee697dc_0": {
+    "parent_id": "parent_doc_3ccee697dc_0",
+    "document_id": "doc_3ccee697dc",
+    "document_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "content": "**Author:** BCG Henderson Institute & DigitalBCG Global Strategy Practice  \n**Classification:** Executive Strategy Publication  \n**Audience:** Chief Executive Officers, Chief Strategy Officers, and Board of Directors  \n\n---",
+    "section_title": "Harnessing Generative AI for Enterprise Competitive Advantage: From Potential to Profit",
+    "page_number": null,
+    "metadata": {
+      "level": 2
+    }
+  },
+  "parent_doc_3ccee697dc_2": {
+    "parent_id": "parent_doc_3ccee697dc_2",
+    "document_id": "doc_3ccee697dc",
+    "document_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "content": "Generative AI (GenAI) represents a paradigm shift in enterprise productivity and corporate strategy. However, BCG's global executive study of over 1,400 C-suite leaders reveals a critical paradox: while **85% of executives** rank GenAI as a top-three strategic priority, **less than 10%** have scaled solutions that generate measurable EBITDA impact.\n\nThe differentiator between market leaders and stagnant pilots is not algorithm selection, but operating model transformation.\n\n---",
+    "section_title": "1. Executive Summary & The Core Paradox",
+    "page_number": null,
+    "metadata": {
+      "level": 3
+    }
+  },
+  "parent_doc_3ccee697dc_4": {
+    "parent_id": "parent_doc_3ccee697dc_4",
+    "document_id": "doc_3ccee697dc",
+    "document_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "content": "BCG’s empirical research across hundreds of enterprise transformations demonstrates that success is distributed across three pillars:\n\n- **10% Algorithms & Foundation Models:** Selecting LLM architectures, fine-tuning embeddings, and RAG retrieval mechanisms.\n- **20% Technology Backbone & Data Architecture:** Data pipelines, enterprise vector stores, API orchestration, and low-latency infrastructure.\n- **70% People, Processes, and Operating Model Reshaping:** Re-architecting workflows, upskilling employees, changing incentive structures, and organizational change management.\n\n> *Strategic Takeaway:* Organizations that allocate more than 30% of their investment purely to software licenses and model compute without addressing workflow re-engineering consistently experience pilot fatigue.\n\n---",
+    "section_title": "2. The BCG 10-20-70 Rule of AI Transformation",
+    "page_number": null,
+    "metadata": {
+      "level": 3
+    }
+  },
+  "parent_doc_3ccee697dc_7": {
+    "parent_id": "parent_doc_3ccee697dc_7",
+    "document_id": "doc_3ccee697dc",
+    "document_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "content": "BCG structures GenAI enterprise value capture into three distinct horizons:\n\n| Horizon | Strategic Scope | Typical Value Capture | Time to Value | Examples |\n|:---|:---|:---|:---|:---|\n| **Horizon 1: Deploy** | Everyday productivity tasks & off-the-shelf tools | 10% to 20% efficiency gains | 1 to 3 months | Coding assistants, automated meeting synthesis, email drafting |\n| **Horizon 2: Reshape** | End-to-end critical business process transformation | **60% to 70% of total economic value** | 6 to 12 months | Multi-document enterprise RAG strategy engine, automated contract compliance audit, dynamic loan underwriting |\n| **Horizon 3: Invent** | Novel business models & new revenue streams | Long-term market differentiation | 12 to 24+ months | Autonomous advisory agents, synthetic data generation as a service, personalized AI companion products |\n\n---",
+    "section_title": "3. The Three-Tier Value Creation Horizon: Deploy, Reshape, Invent",
+    "page_number": null,
+    "metadata": {
+      "level": 3
+    }
+  },
+  "parent_doc_3ccee697dc_11": {
+    "parent_id": "parent_doc_3ccee697dc_11",
+    "document_id": "doc_3ccee697dc",
+    "document_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "content": "When implementing enterprise-grade Retrieval-Augmented Generation (RAG) platforms:\n1. **Direct Compute & Infrastructure Costs:** Self-hosted open-source models (e.g. Llama 3 on local cluster) achieve a **64% lower TCO at scale** compared to purely token-metered proprietary APIs for high-volume internal document queries (>50,000 queries/day).\n2. **Deterministic Computation Bridge:** Pure LLMs fail at financial auditing due to arithmetic hallucinations. Embedding a deterministic Python calculation layer within the RAG stack eliminates calculation error risk while preserving natural language querying.\n3. **Parent-Child Retrieval ROI:** Implementing parent-child chunking reduces token consumption by **38%** relative to raw whole-document windowing, while improving answer precision by 24 percentage points.\n\n---",
+    "section_title": "4. Enterprise RAG Total Cost of Ownership (TCO) & Value Levers",
+    "page_number": null,
+    "metadata": {
+      "level": 3
+    }
+  },
+  "parent_doc_3ccee697dc_14": {
+    "parent_id": "parent_doc_3ccee697dc_14",
+    "document_id": "doc_3ccee697dc",
+    "document_name": "BCG_Enterprise_GenAI_Strategy_Framework.md",
+    "content": "BCG advises organizations to mitigate four core risk dimensions:\n\n1. **Accuracy & Hallucination Exposure:** Mitigated through strict citation-grounded architectures with source line tracing.\n2. **Intellectual Property & Tenant Data Leakage:** Mitigated via localized on-premises or private VPC deployments.\n3. **Regulatory Non-Compliance:** Proactive alignment with the EU AI Act, NIST AI Risk Management Framework, and industry data retention mandates.\n4. **Value Leakage / Vendor Lock-in:** Preserving provider abstraction across hyperscalers and embedding backends.",
+    "section_title": "5. The BCG Enterprise AI Risk Heatmap",
+    "page_number": null,
+    "metadata": {
+      "level": 3
+    }
+  }
+}

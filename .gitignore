@@ -21,7 +21,7 @@ htmlcov/
 chroma_db/
 data/uploaded/
 data/cache/
-data/metadata/
+data/metadata/query_history.json
 storage/
 
 # IDE & OS

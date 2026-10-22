@@ -13,7 +13,7 @@ if str(BASE_DIR) not in sys.path:
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, Response, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
@@ -484,16 +484,23 @@ def run_evaluation_suite():
 
 # Static Files & Frontend Mount
 static_dir = BASE_DIR / "static"
-static_dir.mkdir(parents=True, exist_ok=True)
-app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+if not static_dir.exists():
+    static_dir = BASE_DIR / "public" / "static"
+if not static_dir.exists():
+    static_dir = Path("static")
+if static_dir.exists():
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
 
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def serve_index():
     index_file = static_dir / "index.html"
+    if not index_file.exists():
+        index_file = Path("static/index.html")
     if index_file.exists():
-        return FileResponse(index_file)
-    return {"message": "Enterprise GenAI Strategy Engine API running. Create static/index.html to view UI."}
+        with open(index_file, "r", encoding="utf-8") as f:
+            return f.read()
+    return "<h1>Enterprise GenAI Strategy Engine Web Platform</h1>"
 
 
 def find_available_port(preferred_port: int = 8000) -> int:
