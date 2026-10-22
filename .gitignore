@@ -22,7 +22,7 @@ chroma_db/
 data/uploaded/
 data/cache/
 data/metadata/query_history.json
-storage/
+/storage/
 
 # IDE & OS
 .vscode/
