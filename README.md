@@ -3,6 +3,8 @@
 
 [![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB.svg?logo=python&logoColor=white)](https://python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![Live Demo](https://img.shields.io/badge/Vercel-Live%20Demo-000000?style=flat&logo=vercel&logoColor=white)](https://enterprise-genai-strategy-engine.vercel.app)
+[![API Docs](https://img.shields.io/badge/API-Swagger%20Docs-009688?style=flat&logo=fastapi&logoColor=white)](https://enterprise-genai-strategy-engine.vercel.app/docs)
 [![ChromaDB](https://img.shields.io/badge/ChromaDB-0.5+-orange.svg)](https://trychroma.com)
 [![SentenceTransformers](https://img.shields.io/badge/Embeddings-SentenceTransformers-yellow.svg)](https://sbert.net)
 [![Tests](https://img.shields.io/badge/Tests-26%2F26%20Passing-brightgreen.svg)]()
