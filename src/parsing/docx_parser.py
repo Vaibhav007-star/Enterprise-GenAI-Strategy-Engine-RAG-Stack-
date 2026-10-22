@@ -2,7 +2,10 @@ from pathlib import Path
 from typing import Union, List
 import uuid
 
-import docx
+try:
+    import docx
+except ImportError:
+    docx = None
 
 from .base_parser import BaseParser
 from .models import ParsedDocument, DocumentSection, ParsedTable

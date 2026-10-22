@@ -3,7 +3,10 @@ from typing import Union, List
 import uuid
 import re
 
-from pypdf import PdfReader
+try:
+    from pypdf import PdfReader
+except ImportError:
+    PdfReader = None
 
 from .base_parser import BaseParser
 from .models import ParsedDocument, DocumentSection, ParsedTable
