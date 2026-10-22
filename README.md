@@ -11,6 +11,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)]()
 
 
+> 🚀 **Live Production Deployment**: [enterprise-genai-strategy-engine.vercel.app](https://enterprise-genai-strategy-engine.vercel.app)  
+> 📑 **Interactive API Docs (Swagger UI)**: [enterprise-genai-strategy-engine.vercel.app/docs](https://enterprise-genai-strategy-engine.vercel.app/docs)
+
 > **Transform Enterprise Documents into Actionable Strategy.**  
 > A production-grade Retrieval-Augmented Generation (RAG) platform that queries large corporate document repositories—including audited SEC Form 10-K filings, P&L spreadsheets, contracts, and regulatory policies—delivering verified, evidence-backed answers with deterministic numerical accuracy.
 
